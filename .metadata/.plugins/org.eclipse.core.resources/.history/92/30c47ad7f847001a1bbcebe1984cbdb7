@@ -1,0 +1,35 @@
+package TweetCompiler;
+
+import twitter4j.*;
+import TweetCompiler.TweetFile;
+
+public class TweetCompiler {
+	private static StringBuilder tweets = new StringBuilder("");
+	private static int tweetCount = 0;
+	private static int totalTweets = 0;
+
+	public static void main(String[] args) throws TwitterException {		
+		TwitterStream twitterStream = new TwitterStreamFactory().getInstance().addListener(new StatusListener() {
+            @Override
+            public void onStatus(Status status) {
+            	/*tweets.append(rawJSON + "\n");
+            	++tweetCount;
+            	if(tweetCount == 100)
+            	{
+            		TweetFile.saveTweets(tweets.toString());
+            		tweets.setLength(0);
+            		tweetCount = 0;
+            		totalTweets += 100;
+            		System.out.println(totalTweets + "Tweets");
+            	}*/
+            	System.out.println("@" + status.getUser().getScreenName() + " - " + status.getText());
+            }
+
+            @Override
+            public void onException(Exception ex) {
+                ex.printStackTrace();
+            }
+        }).sample();
+	}
+
+}
