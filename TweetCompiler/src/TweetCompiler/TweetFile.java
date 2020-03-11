@@ -58,7 +58,7 @@ public class TweetFile {
 		      bufferWriter.close();
 		      
 		      // Separate tweet files into files less than 64MB
-		      if(tweetFile.length() >= 59392000) {
+		      if(tweetFile.length() >= 61000000) {
 		    	  // Create a new file when the size of the file in the next
 		    	  // attempt to save may exceed 64MB. Files containing retweets tend
 		    	  // to have a size of 5.5MB per save and without tend around 3.3MB

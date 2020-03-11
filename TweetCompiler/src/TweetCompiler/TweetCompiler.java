@@ -43,7 +43,7 @@ public class TweetCompiler {
             	if(rawJSON.startsWith("{\"created_at\"")) {
             		try {
             			JSONObject tweet = (JSONObject)parser.parse(rawJSON);
-            			
+            		
             			//This exclude tweets that are retweets or replies
 						if(tweet.get("retweeted_status") == null && tweet.get("in_reply_to_status_id") == null) {
 							
@@ -52,10 +52,10 @@ public class TweetCompiler {
 							// "hashtags" and "urls".
 							JSONObject entities = (JSONObject)tweet.get("entities");
 							JSONArray hashtags = (JSONArray)entities.get("hashtags");
-							JSONArray urls = (JSONArray)entities.get("urls");
+							//JSONArray urls = (JSONArray)entities.get("urls");
 							
 							// This selects for tweets that contain either a hashtag or url
-							if(!hashtags.isEmpty() || !urls.isEmpty()) {
+							if(!hashtags.isEmpty() && tweet.get("lang").equals("en")) {// || !urls.isEmpty()) {
 								
 								// Every tweet is a JSON and only one per line
 								tweets.append(rawJSON + "\n");
@@ -77,13 +77,15 @@ public class TweetCompiler {
 				            		totalTweets += 1000;
 				            		System.out.println(totalTweets + " Tweets");
 				            		
+				            		// The system will run continuously and the tweet jsons will be added
+				            		// to hadoop
 				            		// This will begin extracting Hashtag and urls from the collected
 				            		// tweets when there are 100k tweets then exit the program
-				            		if(totalTweets >= 100000) {
-				            			System.out.println("100K tweets collected successfully.");
-				            			TweetExtractor.run();
-				            			System.exit(0);
-				            		}				            		
+				            		//if(totalTweets >= 100000) {
+				            		//	System.out.println("100K tweets collected successfully.");
+				            		//	TweetExtractor.run();
+				            		//	System.exit(0);
+				            		//}				            		
 				            	}
 							}						
 						}
