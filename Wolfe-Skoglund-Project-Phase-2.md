@@ -1,10 +1,10 @@
-# **Wolfe-Skoglund - Project Phase 2**
+# **Project Phase 2**
 ## **Principles of Big Data Management \(CS 5540\)**
 ----------------
 ## Authors: 
-- **Jonnathan Wolfe**
-- **Rod Skoglund**
-### Date: April 25, 2020
+- ## **Jonnathan Wolfe**
+- ## **Rod Skoglund**
+>### Date: April 25, 2020
 ----------------
 
 
@@ -19,26 +19,30 @@
 ----------------
 
 ## **1. Design**
->The design involved severl steps to develop this analysis.
-  1. Installed Cloudera – includes the following:
+>The design involved several steps to develop this analysis.
+  1. Installed Cloudera which includes the following:
       * Hadoop
       * Spark
       * Yarn
-  2. Developed Java script to pull Tweet information and extract hashtags and URLS
+  2. Developed Java script to pull Tweet information and extract Hashtags and URLS
       * Captured 100K tweets, approximately 10 hours of stream sampling
       * Used Java library, twitter4j-4.0.7, to access Twitter Streaming API
       * Selected tweets over all other messages
       * Excluded retweets and replies
-      * Only captured tweets containing hashtags or URLs
+      * Only captured tweets containing Hashtags or URLs
       * Saved the collected tweets into files with each tweet JSON per line
-      * Extracted hashtags and URLs from the collected tweets
-      * Saved the hashtags and URLs into a text file with 10 hashtags or URLs per line
+      * Extracted Hashtags and URLs from the collected tweets
+      * Saved the Hashtags and URLs into a text file with 10 Hashtags or URLs per line
       * All files were limited to approximately 64MB size by writting a new file if it may exceed the size
   3.    Used the Spark Word Counter capability to produce the word count analysis data.
 		   * Used Cloudera default configuration on a pseudo-distributed system
-		   * Transferred files with extracted hashtags/URLs into hadoop file system within the VM
+		   * Transferred files with extracted Hashtags/URLs into hadoop file system within the VM
 		   * Transferred files were saved in a input folder to be used by Spark
 		   * Once Spark was finished, the results were extracted from hadoop and transferred out of the VM
+  4. Developed and implemented queries to provide data for visualations
+  5. Used D3 to create visualations including 
+      * A Bubble Chart to compare the different Hashtags associated with the corona virus and how often each Hashtag is used.
+      * A Bar Chart to show the top Hashtags in use.
 ---
 
 ## **2. Tweet Storage**
@@ -93,9 +97,13 @@
 ---
 
 ## **4. Visualizations**
->Our analysis included a Bubble Chart with a sample of 100k corona relatrd tweets. Each bubble is a different corona virus  hashtag with the number of tweets associated with that hashtag. This only shows hashtags with more than 10 tweets.
+Our analysis included a Bubble Chart with a sample of 100k corona relatrd tweets. Each bubble is a different corona virus Hashtag with the number of tweets associated with that Hashtag. This only shows Hashtags with more than 10 tweets.
 ### Corona Virus Hashtag Bubble Chart:
 ![Bubble Chart](./Screenshots/BubbleChart.png)
+
+We also included a Bar Chart with the top 10 Hashtags Hashtags.
+### Corona Virus Top 10 Hashtag Bar Chart:
+![Bubble Chart](./Screenshots/Top10HashtagsBars.png)
 
 ---
 
@@ -104,9 +112,23 @@
 ---
 
 ## **6. Code**
->Text text text 
+The code is stored and managed via GitHub. It is available at [Wolfe-Skoglund GitHub code](https://github.com/JAWolfe04/CS5540-Big-Data-Project.git)
 ---
 
 ## **7. Demo**
 >Text text text 
+---
+
+## **8. Work Assignments**
+
+- Installations & Setup: 
+  *	Wolfe
+  * Skoglund
+- Coding:
+  * Wolfe \(99%\)
+  * Skoglund \(1%\)
+- Phase #2 documentation:
+  *	Wolfe
+  * Skoglund
+ 
 ---
