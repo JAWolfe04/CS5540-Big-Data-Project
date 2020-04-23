@@ -31,6 +31,7 @@ export class HashtagPage implements OnInit {
     this.loadingTopHashTime = true;
 
     this.dataservice.getBubbleChart().subscribe(hashtags => {
+          console.log(hashtags);
           this.createBubbles(hashtags);
           this.loadingBubble = false;
         },
@@ -82,7 +83,7 @@ export class HashtagPage implements OnInit {
         .attr('height', this.bubbleHeight)
         .attr('class', 'bubble');
 
-    const nodes = (dataset)
+    const nodes = d3.hierarchy(dataset)
         .sum((d: any) => {
           return d.count;
         });
