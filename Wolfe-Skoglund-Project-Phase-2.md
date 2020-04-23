@@ -1,4 +1,4 @@
-# **Project Phase 2**
+# **Project Phase 2 - Analyzing Tweets**
 ## **Principles of Big Data Management \(CS 5540\)**
 ----------------
 ## Authors: 
