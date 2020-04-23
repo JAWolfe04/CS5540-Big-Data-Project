@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {BubbleChart} from '../interface/bubblechart';
 
 @Injectable({
   providedIn: 'root'
