@@ -9,16 +9,16 @@
 
 
 # **Table Of Contents**
-1. Design
-2. Tweet Storage
-3. Queries
-4. Visualizations
-5. Execution Notes
-6. Code
-7. Demo
+1. [Design](#1.-design)
+2. [Tweet Storage](#2.-tweet-storage)
+3. [Queries](#3.-queries)
+4. [Visualizations](#4.-visualizations)
+5. [Code](#5.-code)
+6. [Demo](#6.-Demo)
+7. [Work Assignments](#7.-work-assignments)
 ----------------
 
-## **1. Design**
+# 1. Design
 >The design involved several steps to develop this analysis.
   1. Installed Cloudera which includes the following:
       * Hadoop
@@ -45,11 +45,11 @@
       * A Bar Chart to show the top Hashtags in use.
 ---
 
-## **2. Tweet Storage**
+# **2. Tweet Storage**
 >Text text text 
 ---
 
-## **3. Queries**
+# **3. Queries**
 >Here are the queries we used to get and analyze the data:
 1. Bubble Chart Data
 ```java
@@ -93,10 +93,9 @@
 
 ```
 
-
 ---
 
-## **4. Visualizations**
+# **4. Visualizations**
 Our analysis included a Bubble Chart with a sample of 100k corona relatrd tweets. Each bubble is a different corona virus Hashtag with the number of tweets associated with that Hashtag. This only shows Hashtags with more than 10 tweets.
 ### Corona Virus Hashtag Bubble Chart:
 ![Bubble Chart](./Screenshots/BubbleChart.png)
@@ -107,19 +106,15 @@ We also included a Bar Chart with the top 10 Hashtags Hashtags.
 
 ---
 
-## **5. Execution Notes**
->Text text text 
----
-
-## **6. Code**
+# **5. Code**
 The code is stored and managed via GitHub. It is available at [Wolfe-Skoglund GitHub code](https://github.com/JAWolfe04/CS5540-Big-Data-Project.git)
 ---
 
-## **7. Demo**
->Text text text 
+# **6. Demo**
+The Demo will be shown to the instructor and TA's at a convenient date/time.
 ---
 
-## **8. Work Assignments**
+# **7. Work Assignments**
 
 - Installations & Setup: 
   *	Wolfe
