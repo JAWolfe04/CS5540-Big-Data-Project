@@ -9,13 +9,14 @@ import twitterserver.twitterserver.Config;
 public class Main 
 {	
     public static void main( String[] args ) throws Exception
-    {
+    {        
     	SparkFactory.getInstance();
-    	WebServer webServer = new WebServer();
-    	Server server = webServer.createServer();
-        server.start();
-        System.out.println("Server online at http://" + Config.host + ":" + Config.port + "/");
-        server.join();
-        
+    	if(Config.runServer) {
+	    	WebServer webServer = new WebServer();
+	    	Server server = webServer.createServer();
+	        server.start();
+	        System.out.println("Server online at http://" + Config.host + ":" + Config.port + "/");
+	        server.join();
+    	}
     }
 }

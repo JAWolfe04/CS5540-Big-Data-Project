@@ -1,3 +1,8 @@
-twitterserver\twitterserver\SparkFactory.class
 twitterserver\twitterserver\Main.class
+twitterserver\twitterserver\handler\WordCountHandler.class
+twitterserver\twitterserver\handler\RootHandler.class
+twitterserver\twitterserver\Config.class
+twitterserver\twitterserver\SparkFactory$SparkFactorySingleton.class
+twitterserver\twitterserver\SparkFactory$1.class
+twitterserver\twitterserver\SparkFactory.class
 twitterserver\twitterserver\WebServer.class

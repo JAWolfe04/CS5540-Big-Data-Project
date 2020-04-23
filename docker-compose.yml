@@ -1,0 +1,20 @@
+# docker-compose.yml
+version: "3.3"
+services:
+    spark:
+        build: ./TwitterServer/twitterserver
+        hostname: spark
+        volumes:
+            - "//c/Users/Jonathan/Desktop/Dataset:/mnt/data"
+        ports:
+            - "8001:8001"
+
+    app:
+        build: ./WebApp/WebApp
+        hostname: app
+        ports:
+            - "8100:8100"
+        depends_on:
+            - "spark"
+        links:
+            - "spark"
