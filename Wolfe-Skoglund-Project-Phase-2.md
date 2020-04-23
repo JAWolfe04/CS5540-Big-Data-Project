@@ -1,9 +1,9 @@
 # **Project Phase 2 - Analyzing Tweets**
 ## **Principles of Big Data Management \(CS 5540\)**
 ----------------
-## Authors: 
-- ## **Jonnathan Wolfe**
-- ## **Rod Skoglund**
+>## **Authors**: 
+>- ## **Jonnathan Wolfe**
+>- ## **Rod Skoglund**
 >### Date: April 25, 2020
 ----------------
 
