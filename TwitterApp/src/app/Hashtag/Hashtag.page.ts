@@ -15,13 +15,13 @@ export class HashtagPage implements OnInit {
 
   loadingTopHash: boolean;
   errorTopHash: string;
-  TopHashHeight = 1000;
-  TopHashWidth = 1000;
+  TopHashHeight = 500;
+  TopHashWidth = 1200;
 
   loadingTopHashTime: boolean;
   errorTopHashTime: string;
-  TopHashTimeHeight = 1000;
-  TopHashTimeWidth = 1000;
+  TopHashTimeHeight = 500;
+  TopHashTimeWidth = 750;
 
   constructor(private dataservice: DataService) {}
 
@@ -31,7 +31,6 @@ export class HashtagPage implements OnInit {
     this.loadingTopHashTime = true;
 
     this.dataservice.getBubbleChart().subscribe(hashtags => {
-          console.log(hashtags);
           this.createBubbles(hashtags);
           this.loadingBubble = false;
         },
@@ -60,10 +59,54 @@ export class HashtagPage implements OnInit {
   }
 
   createTop10Hash(dataset) {
+      const margin = 200;
+      const width = this.TopHashWidth - margin;
+      const height = this.TopHashHeight - margin;
+
       const svg = d3.select('#Top10Hash')
           .append('svg')
-          .attr('width', this.bubbleWidth)
-          .attr('height', this.bubbleHeight);
+          .attr('viewBox', `0,0,${this.TopHashWidth},${this.TopHashHeight}`)
+          .attr('width', this.TopHashWidth)
+          .attr('height', this.TopHashHeight);
+
+      const xScale = d3.scaleBand().range ([0, width]).padding(0.4);
+      const yScale = d3.scaleLinear().range ([height, 0]);
+
+      const g = svg.append('g').attr('transform', 'translate(' + 100 + ',' + 100 + ')');
+
+      xScale.domain(dataset.Hashtags.map(d => d.text));
+      yScale.domain([0, d3.max(dataset.Hashtags, d => d.count)]);
+
+      g.append('g')
+          .attr('transform', 'translate(0,' + height + ')')
+          .call(d3.axisBottom(xScale))
+          .append('text')
+          .attr('y', height - 250)
+          .attr('x', width - 100)
+          .attr('text-anchor', 'end')
+          .attr('stroke', 'black')
+          .text('Hashtag');
+
+      g.append('g')
+          .call(d3.axisLeft(yScale).tickFormat(d => {
+              return d;
+          }).ticks(10))
+          .append('text')
+          .attr('transform', 'rotate(-90)')
+          .attr('y', 6)
+          .attr('dy', '-5.1em')
+          .attr('text-anchor', 'end')
+          .attr('stroke', 'black')
+          .text('Tweets with Hashtag');
+
+      g.selectAll('.bar')
+          .data(dataset.Hashtags)
+          .enter().append('rect')
+          .style('fill', 'steelblue')
+          .attr('x', d => xScale(d.text))
+          .attr('y', d => yScale(d.count))
+          .attr('width', xScale.bandwidth())
+          .attr('height', d => height - yScale(d.count));
   }
 
   createTopHashTime(dataset) {
@@ -79,6 +122,7 @@ export class HashtagPage implements OnInit {
 
     const svg = d3.select('#BubbleChart')
         .append('svg')
+        .attr('viewBox', `0,0,${this.bubbleWidth},${this.bubbleHeight}`)
         .attr('width', this.bubbleWidth)
         .attr('height', this.bubbleHeight)
         .attr('class', 'bubble');

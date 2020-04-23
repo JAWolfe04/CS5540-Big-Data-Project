@@ -94,10 +94,15 @@ public class SparkFactory {
 		return jsonObject.toString();
 	}
 	
-	public List<String> getTopHashtagsOverall() {
+	public String getTopHashtagsOverall() {
     	hashtag.createOrReplaceTempView("thash");
     	Dataset<Row> hashtagCount = spark.sql("Select col.text as text, count(col.text) as count from thash group by text order by count desc limit 10");
-    	return hashtagCount.toJSON().toJavaRDD().collect();
+    	String hashtags =  hashtagCount.toJSON().toJavaRDD().collect().toString();
+    	
+    	JsonObject jsonObject = new JsonObject();
+		JsonElement jsonElement =  JsonParser.parseString(hashtags);
+    	jsonObject.add("Hashtags", jsonElement);
+		return jsonObject.toString();
 	}
 	
 	public void stop() {
