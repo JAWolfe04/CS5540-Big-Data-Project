@@ -8,17 +8,17 @@
 
 <ion-content [fullscreen]="true">
   <ion-item id="BubbleChart" lines="none">
-    <div class="errorBubble">{{errorBubble}}</div>
+    <ion-label>{{errorBubble}}</ion-label>
       <ion-skeleton-text *ngIf="loadingBubble" animated [ngStyle]="{'width.px': bubbleWidth , 'height.px' : bubbleHeight }" slot="start">
       </ion-skeleton-text>
   </ion-item>
   <ion-item id="Top10Hash" lines="none">
-    <div class="errorBubble">{{errorTopHash}}</div>
+    <ion-label>{{errorTopHash}}</ion-label>
       <ion-skeleton-text animated *ngIf="loadingTopHash" [ngStyle]="{'width.px': TopHashWidth , 'height.px' : TopHashHeight }" slot="start">
       </ion-skeleton-text>
   </ion-item>
   <ion-item id="TopHashTime" lines="none">
-    <div class="errorBubble">{{errorTopHashTime}}</div>
+    <ion-label>{{errorTopHashTime}}</ion-label>
       <ion-skeleton-text animated *ngIf="loadingTopHashTime" [ngStyle]="{'width.px': TopHashTimeWidth , 'height.px' : TopHashTimeHeight }" slot="start">
       </ion-skeleton-text>
   </ion-item>

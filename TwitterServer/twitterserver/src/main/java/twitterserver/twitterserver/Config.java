@@ -1,7 +1,7 @@
 package twitterserver.twitterserver;
 
 public class Config {
-	public static final String sparkMaster = "local";
+	public static final String sparkMaster = "local[2]";
 	public static final String appname = "TwitterServer";
 	public static final String host = "0.0.0.0";
 	public static final int port = 8001;

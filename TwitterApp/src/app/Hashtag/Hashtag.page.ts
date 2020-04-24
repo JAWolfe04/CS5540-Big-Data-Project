@@ -23,14 +23,14 @@ export class HashtagPage implements OnInit {
   TopHashTimeHeight = 500;
   TopHashTimeWidth = 750;
 
-  constructor(private dataservice: DataService) {}
+  constructor(private dataService: DataService) {}
 
   ngOnInit() {
     this.loadingBubble = true;
     this.loadingTopHash = true;
     this.loadingTopHashTime = true;
 
-    this.dataservice.getBubbleChart().subscribe(hashtags => {
+    this.dataService.getBubbleChart().subscribe(hashtags => {
           this.createBubbles(hashtags);
           this.loadingBubble = false;
         },
@@ -39,7 +39,7 @@ export class HashtagPage implements OnInit {
           this.loadingBubble = false;
     });
 
-    this.dataservice.getTop10Hash().subscribe(top10Hash => {
+    this.dataService.getTop10Hash().subscribe(top10Hash => {
           this.createTop10Hash(top10Hash);
           this.loadingTopHash = false;
         },
@@ -48,7 +48,7 @@ export class HashtagPage implements OnInit {
           this.loadingTopHash = false;
     });
 
-    this.dataservice.getTopHashTime().subscribe(topHashTime => {
+    this.dataService.getTopHashTime().subscribe(topHashTime => {
           this.createTopHashTime(topHashTime);
           this.loadingTopHashTime = false;
         },
@@ -128,9 +128,7 @@ export class HashtagPage implements OnInit {
         .attr('class', 'bubble');
 
     const nodes = d3.hierarchy(dataset)
-        .sum((d: any) => {
-          return d.count;
-        });
+        .sum((d: any) => d.count);
 
     const node = svg.selectAll('.node')
         .data(bubble(nodes).descendants())

@@ -28,7 +28,9 @@
     "rxjs": "~6.5.1",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1",
-    "d3": "5.4.0"
+    "d3": "5.4.0",
+    "topojson": "^3.0.2",
+    "d3-cloud": "^1.2.5"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.20",

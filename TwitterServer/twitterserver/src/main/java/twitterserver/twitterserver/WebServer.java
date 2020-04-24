@@ -42,6 +42,10 @@ public class WebServer {
 		context.addServlet(BotHandler.class, "/bots");
 		context.addServlet(InfluencerHandler.class, "/influencers");
 		context.addServlet(Top10HashHandler.class, "/top10hashtags");
+		context.addServlet(GeoHandler.class, "/geodata");
+		context.addServlet(NewsHandler.class, "/newsdata");
+		context.addServlet(TweetFreqHandler.class, "/tweetfreqdata");
+		context.addServlet(CountryHandler.class, "/countrydata");
 		
 		return server;
 	}

@@ -7,9 +7,11 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div id="Worldchart"></div>
-  <div class="errorWorld">{{errorWorld}}</div>
+  <ion-item id="Worldchart">
+    <ion-label>{{errorWorld}}</ion-label>
+  </ion-item>
 
-  <div id="USchart"></div>
-  <div class="errorUS">{{errorUS}}</div>
+  <ion-item id="USchart">
+    <ion-label>{{errorUS}}</ion-label>
+  </ion-item>
 </ion-content>

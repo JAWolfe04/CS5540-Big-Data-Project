@@ -28,4 +28,20 @@ export class DataService {
   getTopHashTime() {
     return this.http.get(`${this.serverURL}/`);
   }
+
+  getgeoData() {
+    return this.http.get(`${this.serverURL}/geodata`);
+  }
+
+  getNews() {
+    return this.http.get(`${this.serverURL}/newsdata`);
+  }
+
+  getTweetFreq() {
+    return this.http.get(`${this.serverURL}/tweetfreqdata`);
+  }
+
+  getCountryData() {
+    return this.http.get(`${this.serverURL}/countrydata`);
+  }
 }
