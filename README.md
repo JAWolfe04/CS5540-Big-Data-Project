@@ -2,21 +2,21 @@
 ## **Principles of Big Data Management \(CS 5540\)**
 ----------------
 >## **Authors**: 
->- ## **Jonnathan Wolfe**
+>- ## **Jonathan Wolfe**
 >- ## **Rod Skoglund**
 >### Date: April 25, 2020
 ----------------
 
 
 # **Table Of Contents**
-1. [Design](#1.-design)
-2. [Tweet Storage](#2.-tweet-storage)
-3. [Queries](#3.-queries)
-4. [Visualizations](#4.-visualizations)
-5. [Code](#5.-code)
-6. [Demo and Setup](#6.-Demo-and-setup)
-7. [Work Assignments](#7.-work-assignments)
-8. [References](#8.-references)
+1. [Design](#1.-Design)
+2. [Tweet Storage](#2.-Tweet-Storag)
+3. [Queries](#3.-Queries)
+4. [Visualizations](#4.-Visualizations)
+5. [Code](#5.-Code)
+6. [Demo and Setup](#6.-Demo-and-Setup)
+7. [Work Assignments](#7.-Work-Assignments)
+8. [References](#8.-References)
 ----------------
 
 # 1. Design
@@ -46,11 +46,11 @@
       * A Bar Chart to show the top Hashtags in use.
 ---
 
-# **2. Tweet Storage**
+# 2. Tweet Storage
 ### A folder that contains multiple tweet files \(less than 64MB\) in a text format with each line that contains one tweet. Each line is a JSON format for a single tweet, but because it is not in a single named array with commas at the end of each line and it does not have keys associated with each line, the file is not a true JSON formatted file.
 ---
 
-# **3. Queries**
+# 3. Queries
 ### Here are the queries we used to get and analyze the data:
 1. Bubble Chart Data - a hashtagCount query is defined to capture the number of times a a tweet mentiones each Hashtag. We remove all Hashtags that are mentioned in less than 10 tweetss. 
 2. Influencers - the Influencers query will capture the users with the most followers \(these are verified followers\). The query is ordered by the number of followers and we limit the data to the top 50 influencers. 
@@ -104,3 +104,4 @@ The code is stored and managed via GitHub. It is available at [Wolfe-Skoglund Gi
 5. [Twitter search API- Get tweets and tweets count of hashtag using JAVA twitter client Twitter4j](http://jkoder.com/twitter-search-api-get-tweets-and-tweets-count-hashtag-java-client-twitter4j/)
 6. [Docker and Java Application examples](https://mkyong.com/docker/docker-and-java-application-examples/)
 7. [#BotSpot: Twelve Ways to Spot a Bot](https://medium.com/dfrlab/botspot-twelve-ways-to-spot-a-bot-aedc7d9c110c)
+8. [D3-cloud Github](https://github.com/jasondavies/d3-cloud)
