@@ -105,3 +105,4 @@ The code is stored and managed via GitHub. It is available at [Wolfe-Skoglund Gi
 6. [Docker and Java Application examples](https://mkyong.com/docker/docker-and-java-application-examples/)
 7. [#BotSpot: Twelve Ways to Spot a Bot](https://medium.com/dfrlab/botspot-twelve-ways-to-spot-a-bot-aedc7d9c110c)
 8. [D3-cloud Github](https://github.com/jasondavies/d3-cloud)
+9. [Create a simple Donut Chart using D3.js](http://www.adeveloperdiary.com/d3-js/create-a-simple-donut-chart-using-d3-js/)
