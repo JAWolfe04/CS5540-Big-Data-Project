@@ -9,17 +9,17 @@
 
 
 # **Table Of Contents**
-1. [Design](#1.-Design)
-2. [Tweet Storage](#2.-Tweet-Storag)
-3. [Queries](#3.-Queries)
-4. [Visualizations](#4.-Visualizations)
-5. [Code](#5.-Code)
-6. [Demo and Setup](#6.-Demo-and-Setup)
-7. [Work Assignments](#7.-Work-Assignments)
-8. [References](#8.-References)
+1. [Design](#Design)
+2. [Tweet Storage](#Tweet-Storage)
+3. [Queries](#Queries)
+4. [Visualizations](#Visualizations)
+5. [Code](#Code)
+6. [Demo and Setup](#Demo-and-Setup)
+7. [Work Assignments](#Work-Assignments)
+8. [References](#References)
 ----------------
 
-# 1. Design
+# Design
 ### The design involved several steps to develop this analysis.
   1. Installed Cloudera which includes the following:
       * Hadoop
@@ -46,11 +46,11 @@
       * A Bar Chart to show the top Hashtags in use.
 ---
 
-# 2. Tweet Storage
+# Tweet Storage
 ### A folder that contains multiple tweet files \(less than 64MB\) in a text format with each line that contains one tweet. Each line is a JSON format for a single tweet, but because it is not in a single named array with commas at the end of each line and it does not have keys associated with each line, the file is not a true JSON formatted file.
 ---
 
-# 3. Queries
+# Queries
 ### Here are the queries we used to get and analyze the data:
 1. Bubble Chart Data - a hashtagCount query is defined to capture the number of times a a tweet mentiones each Hashtag. We remove all Hashtags that are mentioned in less than 10 tweetss. 
 2. Influencers - the Influencers query will capture the users with the most followers \(these are verified followers\). The query is ordered by the number of followers and we limit the data to the top 50 influencers. 
@@ -58,7 +58,7 @@
 4. Bots Data - made up from multiple queries. This is developed by capturing the users where the "user.statuses_count", "user.created_at" and tweet "created_at" fields all have data (they are not null fields). This data is used to determine the users with more than 50 tweets per day. The data is grouped by users and captures the counts for Tweets per day, Days since started, user name and description
 ---
 
-# **4. Visualizations**
+# Visualizations
 ### Our analysis included a Bubble Chart with a sample of 100k corona relatrd tweets. Each bubble is a different corona virus Hashtag with the number of tweets associated with that Hashtag. This only shows Hashtags with more than 10 tweets.
 ## Corona Virus Hashtag Bubble Chart:
 ![Bubble Chart](./Screenshots/BubbleChart.png)
@@ -69,11 +69,11 @@
 
 ---
 
-# **5. Code**
+# Code
 The code is stored and managed via GitHub. It is available at [Wolfe-Skoglund GitHub code](https://github.com/JAWolfe04/CS5540-Big-Data-Project.git)
 ---
 
-# **6. Demo and Setup**
+# Demo and Setup
 ### The Demo will be shown to the instructor and TA's at a convenient date/time.
 
 ### Here are the instructions for setting up and displaying the data analysis.
@@ -81,7 +81,7 @@ The code is stored and managed via GitHub. It is available at [Wolfe-Skoglund Gi
 2.
 ---
 
-# **7. Work Assignments**
+# Work Assignments
 
 - Installations & Setup: 
   *	Wolfe
@@ -95,7 +95,7 @@ The code is stored and managed via GitHub. It is available at [Wolfe-Skoglund Gi
  
 ---
 
-# **8. References**
+# References
 
 1. [GitHub REST API | Get remote repo files list & download file content programmatically without cloning in local](https://itsallbinary.com/github-rest-api-get-remote-github-repo-files-list-download-file-content-programmatically-without-cloning-in-local/)
 2. [Building Real-time interactions with Spark](https://spoddutur.github.io/spark-notes/build-real-time-interations-with-spark.html)
