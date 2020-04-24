@@ -16,6 +16,7 @@
 5. [Code](#5.-code)
 6. [Demo and Setup](#6.-Demo-and-setup)
 7. [Work Assignments](#7.-work-assignments)
+8. [References](#8.-references)
 ----------------
 
 # 1. Design
@@ -93,3 +94,13 @@ The code is stored and managed via GitHub. It is available at [Wolfe-Skoglund Gi
   * Skoglund
  
 ---
+
+# **8. References**
+
+1. [GitHub REST API | Get remote repo files list & download file content programmatically without cloning in local](https://itsallbinary.com/github-rest-api-get-remote-github-repo-files-list-download-file-content-programmatically-without-cloning-in-local/)
+2. [Building Real-time interactions with Spark](https://spoddutur.github.io/spark-notes/build-real-time-interations-with-spark.html)
+3. [How to send HTTP request GET/POST in Java](https://mkyong.com/java/how-to-send-http-request-getpost-in-java/)
+4. [Embedding Jetty](https://www.eclipse.org/jetty/documentation/current/embedding-jetty.html)
+5. [Twitter search API- Get tweets and tweets count of hashtag using JAVA twitter client Twitter4j](http://jkoder.com/twitter-search-api-get-tweets-and-tweets-count-hashtag-java-client-twitter4j/)
+6. [Docker and Java Application examples](https://mkyong.com/docker/docker-and-java-application-examples/)
+7. [#BotSpot: Twelve Ways to Spot a Bot](https://medium.com/dfrlab/botspot-twelve-ways-to-spot-a-bot-aedc7d9c110c)
