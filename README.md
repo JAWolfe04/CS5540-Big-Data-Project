@@ -10,7 +10,7 @@
 
 # **Table Of Contents**
 1. [Design](#Design)
-2. [Tweet Storage](#Tweet-Storage)
+2. [Libraries](#Libraries)
 3. [Queries](#Queries)
 4. [Visualizations](#Visualizations)
 5. [Code](#Code)
@@ -83,21 +83,21 @@ This only shows Hashtags with more than 10 tweets.
 ![Tweet Pie Chart](./Screenshots/TweetFreqPieChart.png)
 
 ## World Map of Coronavirus tweet GPS coordinates - Still in development
-![World GPS Map]()
+![World GPS Map](./Screenshots/coming-soon.png)
 
 ## Multiple Line Graph of Top 10 hastags over time - Still in development
-![Top 10 Line Graph]()
+![Top 10 Line Graph](./Screenshots/coming-soon.png)
 
 ## Stacked Area Graph of Most retweeted tweet of corona with follower count and listed - Still in development
-![Stacked Area Graph]()
+![Stacked Area Graph](./Screenshots/coming-soon.png)
 
 ## Layered Bar Graph of News agency influences - Still in development
-![News Layered Bar Graph]()
+![News Layered Bar Graph](./Screenshots/coming-soon.png)
 
 ---
 
 # Code
-The code is stored and managed via GitHub. It is available at [Wolfe-Skoglund GitHub code](https://github.com/JAWolfe04/CS5540-Big-Data-Project.git)
+The code is stored and managed via GitHub. It is available at [Wolfe-Skoglund GitHub code](https://github.com/JAWolfe04/CS5540-Big-Data-Project.png)
 ---
 
 # Demo and Setup
