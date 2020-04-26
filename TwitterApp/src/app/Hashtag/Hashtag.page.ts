@@ -56,6 +56,16 @@ export class HashtagPage implements OnInit {
             this.errorTopHashTime = 'Unable to load Hashtag Chart';
             this.loadingTopHashTime = false;
     });
+    /*this.createTopHashTime([
+          {Time: '03-13-23', Hashtag: 'Corona', Count: 14684},
+          {Time: '03-13-23', Hashtag: 'China', Count: 12863},
+          {Time: '03-13-23', Hashtag: 'Trump', Count: 18462},
+          {Time: '03-14-00', Hashtag: 'Corona', Count: 17452},
+          {Time: '03-14-00', Hashtag: 'China', Count: 19539},
+          {Time: '03-14-00', Hashtag: 'Trump', Count: 12336},
+          {Time: '03-14-01', Hashtag: 'Corona', Count: 9573},
+          {Time: '03-14-01', Hashtag: 'China', Count: 19463},
+          {Time: '03-14-01', Hashtag: 'Trump', Count: 16493}]);*/
   }
 
   createTop10Hash(dataset) {
@@ -110,7 +120,36 @@ export class HashtagPage implements OnInit {
   }
 
   createTopHashTime(dataset) {
+      /*const parseDate = d3.timeParse('%m-%d-%h');
 
+      const x = d3.scaleTime().range([0, this.TopHashWidth]);
+      const y = d3.scaleLinear().range([this.TopHashTimeHeight, 0]);
+
+      const xAxis = d3.axisBottom().scale(x)
+          .orient('bottom').ticks(5);
+
+      const yAxis = d3.axisLeft.scale(y)
+          .orient('left').ticks(5);
+
+      const countline = d3.svg.line()
+          .x(d => x(d.Time))
+          .y(d => y(d.Count));
+
+      const svg = d3.select('#TopHashTime')
+          .append('svg')
+          .attr('width', this.TopHashWidth)
+          .attr('height', this.TopHashTimeHeight)
+          .append('g')
+          .attr('transform',
+              'translate(' + 25 + ',' + 25 + ')');
+
+      dataset.forEach(d => {
+          d.Time = parseDate(d.Time);
+          d.Count = +d.Count;
+      });
+
+      x.domain(d3.extent(dataset, d => d.Time));
+      y.domain([0, d3.max(dataset, d => d.Count)]);*/
   }
 
   createBubbles(dataset) {

@@ -25,11 +25,15 @@ export class DataService {
     return this.http.get(`${this.serverURL}/top10hashtags`);
   }
 
-  getTopHashTime() {
-    return this.http.get(`${this.serverURL}/`);
+  getMostRetweeted() {
+      return this.http.get(`${this.serverURL}/mostretweeted`);
   }
 
-  getgeoData() {
+  getTopHashTime() {
+    return this.http.get(`${this.serverURL}/tophashtime`);
+  }
+
+  getGeoData() {
     return this.http.get(`${this.serverURL}/geodata`);
   }
 

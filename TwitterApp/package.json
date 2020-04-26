@@ -25,12 +25,14 @@
     "@ionic-native/status-bar": "^5.0.0",
     "@ionic/angular": "^5.0.0",
     "core-js": "^2.5.4",
+    "d3": "5.4.0",
+    "d3-cloud": "^1.2.5",
     "rxjs": "~6.5.1",
+    "topojson": "^3.0.2",
+    "topojson-client": "^3.1.0",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1",
-    "d3": "5.4.0",
-    "topojson": "^3.0.2",
-    "d3-cloud": "^1.2.5"
+    "d3-svg-legend": "^2.25.6"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.20",

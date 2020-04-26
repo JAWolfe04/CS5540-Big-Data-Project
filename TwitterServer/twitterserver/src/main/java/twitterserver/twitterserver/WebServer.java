@@ -46,6 +46,8 @@ public class WebServer {
 		context.addServlet(NewsHandler.class, "/newsdata");
 		context.addServlet(TweetFreqHandler.class, "/tweetfreqdata");
 		context.addServlet(CountryHandler.class, "/countrydata");
+		context.addServlet(MostRetweetedHandler.class, "/mostretweeted");
+		context.addServlet(TopHashTimeHandler.class, "/tophashtime");
 		
 		return server;
 	}

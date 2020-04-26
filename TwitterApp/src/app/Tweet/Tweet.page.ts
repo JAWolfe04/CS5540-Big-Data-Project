@@ -13,7 +13,8 @@ export class TweetPage implements OnInit {
   freqHeight = 500;
 
   retweetError: string;
-
+  retweetWidth = 500;
+  retweetHeight = 500;
 
   constructor(private dataService: DataService) { }
 
@@ -29,6 +30,14 @@ export class TweetPage implements OnInit {
           this.freqError = 'Unable to load Tweet Frequency Data';
         }
     );
+
+    /*this.createStacked([{Time: '03-13-23', Retweet_Count: 23758, Followers_Count: 235, Listed_Count: 54},
+      {Time: '03-14-00', Retweet_Count: 73265, Followers_Count: 325, Listed_Count: 93},
+      {Time: '03-14-01', Retweet_Count: 63495, Followers_Count: 763, Listed_Count: 25}]);*/
+  }
+
+  createStacked(dataset) {
+
   }
 
   createPie(dataset) {
