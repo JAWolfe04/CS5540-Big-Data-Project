@@ -21,33 +21,29 @@
 
 # Design
 ### The design involved several steps to develop this analysis.
-  1. Installed Cloudera which includes the following:
-      * Hadoop
-      * Spark
-      * Yarn
-  2. Developed Java script to pull Tweet information and extract Hashtags and URLS
-      * Captured 100K tweets, approximately 10 hours of stream sampling
-      * Used Java library, twitter4j-4.0.7, to access Twitter Streaming API
-      * Selected tweets over all other messages
-      * Excluded retweets and replies
-      * Only captured tweets containing Hashtags or URLs
+  1. Developed Java script to pull Tweet information and extract Hashtags and URLS
+      * Captured 250k tweets containing #coronavirus and filtered to only include tweets in english
+      * It used Java library, twitter4j-4.0.7, to access the Twitter API
       * Saved the collected tweets into files with each tweet JSON per line
-      * Extracted Hashtags and URLs from the collected tweets
-      * Saved the Hashtags and URLs into a text file with 10 Hashtags or URLs per line
       * All files were limited to approximately 64MB size by writting a new file if it may exceed the size
-  3. Used the Spark Word Counter capability to produce the word count analysis data.
-		   * Used Cloudera default configuration on a pseudo-distributed system
-		   * Transferred files with extracted Hashtags/URLs into hadoop file system within the VM
-		   * Transferred files were saved in a input folder to be used by Spark
-		   * Once Spark was finished, the results were extracted from hadoop and transferred out of the VM
-  4. Developed and implemented queries to provide data for visualations
-  5. Used D3 to create visualations including 
-      * A Bubble Chart to compare the different Hashtags associated with the corona virus and how often each Hashtag is used.
-      * A Bar Chart to show the top Hashtags in use.
+  2. Developed and implemented queries to provide data for visualations using java and accessing the spark library
+  3. Hosted a jetty REST API server in the application utilizing Spark to run queries
+  4. Developed a connection to the REST API through an Ionic application developed using Angular
+  5. Used D3 to create visualations including
+  6. Docker was utilized to containerize the REST API server and Ionic web application server
+      
 ---
-
-# Tweet Storage
-### A folder that contains multiple tweet files \(less than 64MB\) in a text format with each line that contains one tweet. Each line is a JSON format for a single tweet, but because it is not in a single named array with commas at the end of each line and it does not have keys associated with each line, the file is not a true JSON formatted file.
+# Libraries
+We used numerous libraries to collect, analyze and display the data:
+* twitter4j-4.0.7
+* Appache Spark 2.4.5
+* Spark SQL 2.4.5
+* jetty 9.4.28.v20200408
+* Gson 2.8.6
+* Angular
+* Ionic
+* D3
+* Docker
 ---
 
 # Queries
@@ -56,16 +52,47 @@
 2. Influencers - the Influencers query will capture the users with the most followers \(these are verified followers\). The query is ordered by the number of followers and we limit the data to the top 50 influencers. 
 3. Top Hashtags Overall - This query is used to capture the top ten Hashtags based on the number of tweets that reference the Hashtag.
 4. Bots Data - made up from multiple queries. This is developed by capturing the users where the "user.statuses_count", "user.created_at" and tweet "created_at" fields all have data (they are not null fields). This data is used to determine the users with more than 50 tweets per day. The data is grouped by users and captures the counts for Tweets per day, Days since started, user name and description
+5. Coronavirus tweet, retweet and response freqencies - 
+6. Coronavirus tweets grouped by country -
+7. Coronavirus tweet GPS coordinates - 
+8. Top 10 hastags over time -
+9. Most retweeted tweet of corona with follower count and listed -
+10. News agency influences -
 ---
 
 # Visualizations
-### Our analysis included a Bubble Chart with a sample of 100k corona relatrd tweets. Each bubble is a different corona virus Hashtag with the number of tweets associated with that Hashtag. This only shows Hashtags with more than 10 tweets.
-## Corona Virus Hashtag Bubble Chart:
+### Our analysis included a sample of 100k coronavirus related tweets.
+## Word Cloud of Usernames with Greatest Influence
+![Word Cloud](./Screenshots/WordCloud.png)
+
+## Coronavirus Hashtag Bubble Chart:
+Each bubble is a different corona virus Hashtag with the number of tweets associated with that Hashtag.  
 ![Bubble Chart](./Screenshots/BubbleChart.png)
 
-### We also included a Bar Chart with the top 10 Hashtags.
-## Corona Virus Top 10 Hashtag Bar Chart:
-![Bubble Chart](./Screenshots/Top10HashtagsBars.png)
+## Coronavirus Top 10 Hashtag Bar Chart:
+This only shows Hashtags with more than 10 tweets.  
+![Top Hashtags Bar Graph](./Screenshots/Top10HashtagsBars.png)
+
+## World Countries Map of Coronavirus Tweets
+![Countries Map](./Screenshots/CountriesMap.png)
+
+## Donut Charts of Bot Frequencies and activities
+![Bot Charts](./Screenshots/BotDonutCharts.png)
+
+## Pie Chart of User Tweet Activity
+![Tweet Pie Chart](./Screenshots/TweetFreqPieChart.png)
+
+## World Map of Coronavirus tweet GPS coordinates - Still in development
+![World GPS Map]()
+
+## Multiple Line Graph of Top 10 hastags over time - Still in development
+![Top 10 Line Graph]()
+
+## Stacked Area Graph of Most retweeted tweet of corona with follower count and listed - Still in development
+![Stacked Area Graph]()
+
+## Layered Bar Graph of News agency influences - Still in development
+![News Layered Bar Graph]()
 
 ---
 
@@ -77,20 +104,20 @@ The code is stored and managed via GitHub. It is available at [Wolfe-Skoglund Gi
 ### The Demo will be shown to the instructor and TA's at a convenient date/time.
 
 ### Here are the instructions for setting up and displaying the data analysis.
-1. # \<Need to define these instructions\>
-2.
+1. A file called Dataset containing tweet data files will need to be created as //c/Users/Dataset to serve the application data.
+2. Best method would be to retrieve the image from docker and run the image otherwise I am uncertain how to run it outside of a development environment
 ---
 
 # Work Assignments
 
 - Installations & Setup: 
-  *	Wolfe
+  * Wolfe
   * Skoglund
 - Coding:
   * Wolfe \(99%\)
   * Skoglund \(1%\)
 - Phase #2 documentation:
-  *	Wolfe
+  * Wolfe
   * Skoglund
  
 ---
