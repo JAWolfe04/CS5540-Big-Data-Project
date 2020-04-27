@@ -109,8 +109,15 @@ The code is stored and managed via GitHub. It is available at [Wolfe-Skoglund Gi
 ### The Demo will be shown to the instructor and TA's at a convenient date/time.
 
 ### Here are the instructions for setting up and displaying the data analysis.
-1. A file called Dataset containing tweet data files will need to be created as //c/Users/Dataset to serve the application data.
-2. Best method would be to retrieve the image from docker and run the image otherwise I am uncertain how to run it outside of a development environment
+1. If you are using using Docker Toolbox or Docker Machine, which is running Docker on a Linux VM, you will need to add the jawhf4/twitterserver container ID to the VM running Docker with the host and guest ports both 8001. Follow the instructions explained in [Using Docker containers as localhost on Mac/Windows](https://www.jhipster.tech/tips/020_tip_using_docker_containers_as_localhost_on_mac_and_windows.html).
+2. Then enter the following commands in the Docker CLI to pull the images from DockerHub: 
+    * docker pull jawhf4/twitterproject:app
+    * docker pull jawhf4/twitterproject:server
+3. Now you can run the web app from the Docker CLI with:
+    * docker container run -d -p 8100:8100 jawhf4/twitterproject:app
+4. Finally you can run the Spark server, which will display the activity in Docker and will need to post a message about the server listening on localhost:8001 before the web application can begin interacting with the Spark REST API server, from the Docker CLI with:
+    * docker container run -p 8001:8001 -v "/location_of_your_dataset:/mnt/data" jawhf4/twitterproject:server
+
 ---
 
 # Work Assignments
@@ -138,3 +145,4 @@ The code is stored and managed via GitHub. It is available at [Wolfe-Skoglund Gi
 7. [#BotSpot: Twelve Ways to Spot a Bot](https://medium.com/dfrlab/botspot-twelve-ways-to-spot-a-bot-aedc7d9c110c)
 8. [D3-cloud Github](https://github.com/jasondavies/d3-cloud)
 9. [Create a simple Donut Chart using D3.js](http://www.adeveloperdiary.com/d3-js/create-a-simple-donut-chart-using-d3-js/)
+10. [Using Docker containers as localhost on Mac/Windows](https://www.jhipster.tech/tips/020_tip_using_docker_containers_as_localhost_on_mac_and_windows.html)
