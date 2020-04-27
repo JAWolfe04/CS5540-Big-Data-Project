@@ -40,9 +40,14 @@ We used numerous libraries to collect, analyze and display the data:
 * Spark SQL 2.4.5
 * jetty 9.4.28.v20200408
 * Gson 2.8.6
-* Angular
-* Ionic
-* D3
+* Angular 8.2.14
+* Ionic 5.0.0
+* D3 5.4.0
+* D3-Cloud 1.2.5
+* rxjs 6.5.1
+* topojson 3.0.2
+* topojson-client 3.1.0
+* D3-svg-legend 2.25.6
 * Docker
 ---
 
