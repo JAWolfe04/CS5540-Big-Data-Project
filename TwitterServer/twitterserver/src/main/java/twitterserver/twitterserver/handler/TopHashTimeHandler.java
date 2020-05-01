@@ -1,5 +1,6 @@
 package twitterserver.twitterserver.handler;
 
+import org.apache.log4j.Logger;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -15,11 +16,11 @@ public class TopHashTimeHandler extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.setContentType("application/json");
 		response.setStatus(HttpServletResponse.SC_OK);
-		System.out.println("Getting Top Hashtags over time Data");
+		Logger.getRootLogger().info("Getting Top Hashtags over time Data");
 		
 		PrintWriter out = response.getWriter();
 		out.println(SparkFactory.getInstance().getTopHashTime());
 	
-		System.out.println("Finished Top Hashtags over time Data");
+		Logger.getRootLogger().info("Finished Top Hashtags over time Data");
 	}
 }

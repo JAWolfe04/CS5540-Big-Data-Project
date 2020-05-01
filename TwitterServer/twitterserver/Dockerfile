@@ -7,5 +7,6 @@ WORKDIR /usr/local/runme
 
 COPY ${JAR_FILE} app.jar
 ADD ${JAR_LIB_FILE} lib/
+EXPOSE 8001
 
 CMD ["java","-jar","app.jar"]

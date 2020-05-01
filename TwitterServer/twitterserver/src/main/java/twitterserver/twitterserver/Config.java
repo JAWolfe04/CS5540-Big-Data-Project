@@ -7,5 +7,5 @@ public class Config {
 	public static final int port = 8001;
 	public static final int timeout = 30000;
 	public static final boolean runServer = true;
-	public static final String path = "C:\\Users\\Jonathan\\Desktop\\UMKC\\CS 5540\\Project\\CS5540-Big-Data-Project\\Datasets\\Sample DS";//"/mnt/data";
+	public static final String path = "/mnt/data";
 }

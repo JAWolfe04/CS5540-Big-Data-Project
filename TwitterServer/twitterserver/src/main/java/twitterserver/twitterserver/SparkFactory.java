@@ -6,14 +6,15 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.Level;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 
@@ -33,19 +34,20 @@ public class SparkFactory {
 	private SparkFactory() {		
 		spark = SparkSession.builder().appName(Config.appname)
 				.master(Config.sparkMaster).getOrCreate();
-		Logger.getRootLogger().setLevel(Level.ERROR);
 		
 		File tmpDir = new File(Config.path);
 		if(!tmpDir.exists()) {
-			System.out.print(Config.path + " does not exist");
+			Logger.getRootLogger().info(Config.path + " does not exist");
 			System.exit(1);
 		}
 		
     	data = spark.read().json(Config.path);
-    	data = data.withColumn("created_at", unix_timestamp(data.col("created_at"), "EEE MMM dd HH:mm:ss ZZZZZ yyyy").cast("timestamp"));
+    	Logger.getRootLogger().info("Converting values..");
+    	data = data.withColumn("created_at", to_timestamp(data.col("created_at"), "EEE MMM dd HH:mm:ss '+0000' yyyy"));
     	data = data.withColumn("Hourly_Time", date_format(data.col("created_at"), "MM-dd-HH"));
     	hashtag = data.select(explode(data.col("entities.hashtags")), data.col("Hourly_Time"));
     	
+    	Logger.getRootLogger().info("Pre-calculating shared counts..");
     	totalRetweets = data.filter("retweeted_status is not null").count();
 		totalReplies = data.filter("in_reply_to_status_id is not null").count();
 		totalTweets = data.filter("retweeted_status is null and in_reply_to_status_id is null").count();
@@ -129,6 +131,7 @@ public class SparkFactory {
 	}
 	
 	public String getGeoData() {
+		System.out.println("Getting Geodata");
 		Dataset<Row> coordsData = data.filter("geo.coordinates is not null")
 				.selectExpr("id", "coordinates.coordinates");
 		Dataset<Row> placeData = data.filter("place.bounding_box.coordinates is not null and geo.coordinates is null")
@@ -138,18 +141,11 @@ public class SparkFactory {
 		Dataset<Row> latData = coordsData.selectExpr("id","coordinates[1] as latitude");
 		coordsData = coordsData.join(longData, coordsData.col("id").equalTo(longData.col("id"))).drop(longData.col("id"));
 		coordsData = coordsData.join(latData, coordsData.col("id").equalTo(latData.col("id"))).drop(latData.col("id"));
-		coordsData = coordsData.withColumn("geoJson", 
-				concat(lit("{\"type\": \"Feature\",\"geometry\": {\"type\": \"Point\",\"coordinates\": ["), 
-						coordsData.col("latitude"),
-						lit(','),
-						coordsData.col("longitude"),
-						lit("]},\"properties\":{}}")));
-		String geoJson = coordsData.select("geoJson").javaRDD().map(r -> r.get(0)).collect().toString();
+		String geoJson = coordsData.select("longitude", "latitude").toJSON().toJavaRDD().collect().toString();
 		
 		JsonObject jsonObject = new JsonObject();
-		jsonObject.addProperty("type", "FeatureCollection");
 		JsonElement jsonElement =  JsonParser.parseString(geoJson);
-    	jsonObject.add("features", jsonElement);
+    	jsonObject.add("Coords", jsonElement);
 		return jsonObject.toString();
 	}
 	
@@ -266,6 +262,9 @@ public class SparkFactory {
 		Dataset<Row> filtDates = hashtag.filter("Hourly_Time is not null");		
 		List<Row> dateRange = filtDates.groupBy("Hourly_Time").agg(count(lit(1)).alias("Count"))
 					.filter("Count > 1000").agg(min("Hourly_Time"), max("Hourly_Time")).collectAsList();
+		
+		filtDates.groupBy("Hourly_Time").agg(count(lit(1)).alias("Count")).show();
+		//.agg(min("Hourly_Time"), max("Hourly_Time")).show();//.filter("Count > 1000")
 		
 		List<TopHashTimeClass> data = new ArrayList<TopHashTimeClass>();
 		String startTime = dateRange.get(0).get(0).toString();

@@ -1,5 +1,7 @@
 package twitterserver.twitterserver.handler;
 
+import org.apache.log4j.Logger;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -16,10 +18,11 @@ public class MostRetweetedHandler extends HttpServlet {
 		response.setContentType("application/json");
 		response.setStatus(HttpServletResponse.SC_OK);
 		System.out.println("Getting Retweeted Data");
+		Logger.getRootLogger().info("Getting Retweeted Data");
 		
 		PrintWriter out = response.getWriter();
 		out.println(SparkFactory.getInstance().getMostRetweeted());
 	
-		System.out.println("Finished Retweeted Data");
+		Logger.getRootLogger().info("Finished Retweeted Data");
 	}
 }

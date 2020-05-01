@@ -1,6 +1,7 @@
 import {Component, Injectable, OnInit} from '@angular/core';
 import {DataService} from '../service/data.service';
 import * as d3 from 'd3';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-Hashtag',
@@ -26,36 +27,38 @@ export class HashtagPage implements OnInit {
   constructor(private dataService: DataService) {}
 
   ngOnInit() {
-    this.loadingBubble = true;
-    this.loadingTopHash = true;
-    this.loadingTopHashTime = true;
+      if (!environment.testing) {
+          this.loadingBubble = true;
+          this.loadingTopHash = true;
+          this.loadingTopHashTime = true;
 
-    this.dataService.getBubbleChart().subscribe(hashtags => {
-          this.createBubbles(hashtags);
-          this.loadingBubble = false;
-        },
-        error => {
-          this.errorBubble = 'Unable to load Bubble Chart';
-          this.loadingBubble = false;
-    });
+          this.dataService.getBubbleChart().subscribe(hashtags => {
+                  this.createBubbles(hashtags);
+                  this.loadingBubble = false;
+              },
+              error => {
+                  this.errorBubble = 'Unable to load Bubble Chart';
+                  this.loadingBubble = false;
+              });
 
-    this.dataService.getTop10Hash().subscribe(top10Hash => {
-          this.createTop10Hash(top10Hash);
-          this.loadingTopHash = false;
-        },
-        error => {
-          this.errorTopHash = 'Unable to load Top 10 Hashtags';
-          this.loadingTopHash = false;
-    });
+          this.dataService.getTop10Hash().subscribe(top10Hash => {
+                  this.createTop10Hash(top10Hash);
+                  this.loadingTopHash = false;
+              },
+              error => {
+                  this.errorTopHash = 'Unable to load Top 10 Hashtags';
+                  this.loadingTopHash = false;
+              });
 
-    this.dataService.getTopHashTime().subscribe(topHashTime => {
-          this.createTopHashTime(topHashTime);
-          this.loadingTopHashTime = false;
-        },
-        error => {
-            this.errorTopHashTime = 'Unable to load Hashtag Chart';
-            this.loadingTopHashTime = false;
-    });
+          this.dataService.getTopHashTime().subscribe(topHashTime => {
+                  this.createTopHashTime(topHashTime);
+                  this.loadingTopHashTime = false;
+              },
+              error => {
+                  this.errorTopHashTime = 'Unable to load Hashtag Chart';
+                  this.loadingTopHashTime = false;
+              });
+      }
     /*this.createTopHashTime([
           {Time: '03-13-23', Hashtag: 'Corona', Count: 14684},
           {Time: '03-13-23', Hashtag: 'China', Count: 12863},

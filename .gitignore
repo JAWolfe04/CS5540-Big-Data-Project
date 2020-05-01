@@ -25,3 +25,5 @@ hs_err_pid*
 twitter4j-4.0.7/
 Datasets/*
 TweetCollector/TweetCollector/twitter4j.properties
+TwitterServer/twitterserver/target/surefire-reports/TEST-twitterserver.twitterserver.AppTest.xml
+Docker Notes.txt

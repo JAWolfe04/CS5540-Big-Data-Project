@@ -4,6 +4,8 @@ import java.util.EnumSet;
 
 import javax.servlet.DispatcherType;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.Level;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.servlet.FilterHolder;
@@ -16,6 +18,7 @@ import twitterserver.twitterserver.Config;
 public class WebServer {
 	
 	public Server createServer() {
+		Logger.getRootLogger().setLevel(Level.INFO);
 		Server server = new Server();
 		
 		ServerConnector http = new ServerConnector(server);

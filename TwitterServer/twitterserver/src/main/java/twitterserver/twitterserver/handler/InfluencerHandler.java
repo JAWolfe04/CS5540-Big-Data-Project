@@ -1,5 +1,7 @@
 package twitterserver.twitterserver.handler;
 
+import org.apache.log4j.Logger;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -16,10 +18,11 @@ public class InfluencerHandler extends HttpServlet {
 		response.setContentType("application/json");
 		response.setStatus(HttpServletResponse.SC_OK);
 		System.out.println("Getting Influener Data");
+		Logger.getRootLogger().info("Getting Influener Data");
 		
 		PrintWriter out = response.getWriter();
 		out.println(SparkFactory.getInstance().getInfluencers());
 	
-		System.out.println("Finished Influener Data");
+		Logger.getRootLogger().info("Finished Influener Data");
 	}
 }

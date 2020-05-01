@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {DataService} from '../service/data.service';
 import * as cloud from 'd3-cloud';
 import * as d3 from 'd3';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-User',
@@ -22,29 +23,31 @@ export class UserPage implements OnInit {
   constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
-    this.influencerLoading = true;
-    this.botLoading = true;
+    if (!environment.testing) {
+      this.influencerLoading = true;
+      this.botLoading = true;
 
-    this.dataService.getBots().subscribe((botData: any) => {
-          this.createDonuts(botData.Total, '#BotsTotals');
-          this.createDonuts(botData.Frequency, '#BotsFrequency');
-          this.botLoading = false;
-        },
-        error => {
-          this.botError = 'Unable to load Bot Donut Charts';
-          this.botLoading = false;
-        }
-    );
+      this.dataService.getBots().subscribe((botData: any) => {
+            this.createDonuts(botData.Total, '#BotsTotals');
+            this.createDonuts(botData.Frequency, '#BotsFrequency');
+            this.botLoading = false;
+          },
+          error => {
+            this.botError = 'Unable to load Bot Donut Charts';
+            this.botLoading = false;
+          }
+      );
 
-    this.dataService.getInfluencers().subscribe((influencerData: any) => {
-          this.createInfluencerCloud(influencerData.Influencers);
-          this.influencerLoading = false;
-        },
-        error => {
-          this.influencerError = 'Unable to load Influencer Word Cloud';
-          this.influencerLoading = false;
-        }
-    );
+      this.dataService.getInfluencers().subscribe((influencerData: any) => {
+            this.createInfluencerCloud(influencerData.Influencers);
+            this.influencerLoading = false;
+          },
+          error => {
+            this.influencerError = 'Unable to load Influencer Word Cloud';
+            this.influencerLoading = false;
+          }
+      );
+    }
   }
 
   createDonuts(dataset, chartName) {

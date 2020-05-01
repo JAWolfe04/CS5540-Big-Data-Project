@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {DataService} from '../service/data.service';
 import * as d3 from 'd3';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-Tweet',
@@ -19,21 +20,23 @@ export class TweetPage implements OnInit {
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    this.dataService.getTweetFreq().subscribe((freqData: any) => {
-      this.createPie([
-            {name: 'Retweets', percent: freqData.Retweets},
-            {name: 'Replies', percent: freqData.Replies},
-            {name: 'Tweets', percent: freqData.Tweets}
-          ]);
-        },
-        error => {
-          this.freqError = 'Unable to load Tweet Frequency Data';
-        }
-    );
+    if (!environment.testing) {
+        this.dataService.getTweetFreq().subscribe((freqData: any) => {
+              this.createPie([
+                {name: 'Retweets', percent: freqData.Retweets},
+                {name: 'Replies', percent: freqData.Replies},
+                {name: 'Tweets', percent: freqData.Tweets}
+              ]);
+            },
+            error => {
+              this.freqError = 'Unable to load Tweet Frequency Data';
+            }
+        );
 
-    /*this.createStacked([{Time: '03-13-23', Retweet_Count: 23758, Followers_Count: 235, Listed_Count: 54},
-      {Time: '03-14-00', Retweet_Count: 73265, Followers_Count: 325, Listed_Count: 93},
-      {Time: '03-14-01', Retweet_Count: 63495, Followers_Count: 763, Listed_Count: 25}]);*/
+        /*this.createStacked([{Time: '03-13-23', Retweet_Count: 23758, Followers_Count: 235, Listed_Count: 54},
+            {Time: '03-14-00', Retweet_Count: 73265, Followers_Count: 325, Listed_Count: 93},
+            {Time: '03-14-01', Retweet_Count: 63495, Followers_Count: 763, Listed_Count: 25}]);*/
+    }
   }
 
   createStacked(dataset) {
