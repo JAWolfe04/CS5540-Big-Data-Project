@@ -148,3 +148,4 @@ The code is stored and managed via GitHub. It is available at [Wolfe-Skoglund Gi
 10. [Using Docker containers as localhost on Mac/Windows](https://www.jhipster.tech/tips/020_tip_using_docker_containers_as_localhost_on_mac_and_windows.html)
 11. [Map-with-Latitude-Longitude](http://bl.ocks.org/lokesh005/7640d9b562bf59b561d6)
 12. [D3.js Stacked Bar Chart](https://codepen.io/benlister/pen/bNeLQy?editors=0010)
+13. [How to create a stacked area chart with D3](https://medium.com/@louisemoxy/how-to-create-a-stacked-area-chart-with-d3-28a2fee0b8ca)
