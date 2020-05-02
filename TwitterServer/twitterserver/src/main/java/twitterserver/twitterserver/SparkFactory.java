@@ -34,6 +34,7 @@ public class SparkFactory {
 	private SparkFactory() {		
 		spark = SparkSession.builder().appName(Config.appname)
 				.master(Config.sparkMaster).getOrCreate();
+		Logger.getRootLogger().setLevel(Level.ERROR);
 		
 		File tmpDir = new File(Config.path);
 		if(!tmpDir.exists()) {
@@ -44,6 +45,7 @@ public class SparkFactory {
     	data = spark.read().json(Config.path);
     	Logger.getRootLogger().info("Converting values..");
     	data = data.withColumn("created_at", to_timestamp(data.col("created_at"), "EEE MMM dd HH:mm:ss '+0000' yyyy"));
+    	data = data.withColumn("user_created_at", to_timestamp(data.col("user.created_at"), "EEE MMM dd HH:mm:ss '+0000' yyyy"));
     	data = data.withColumn("Hourly_Time", date_format(data.col("created_at"), "MM-dd-HH"));
     	hashtag = data.select(explode(data.col("entities.hashtags")), data.col("Hourly_Time"));
     	
@@ -77,17 +79,13 @@ public class SparkFactory {
 	}
 	
 	public String getBotsData() {
-		Dataset<Row> users = data.filter("user.statuses_count is not null and user.created_at is not null");
-		Dataset<Row> adjUsers = users.withColumn("user_created_at", 
-				unix_timestamp(users.col("user.created_at"), 
-				"EEE MMM dd HH:mm:ss ZZZZZ yyyy").cast("timestamp"));
-		adjUsers = adjUsers.withColumn("Days_since_started", 
-				datediff(adjUsers.col("created_at"), 
-				adjUsers.col("user_created_at")));
-		adjUsers = adjUsers.withColumn("Tweets_per_day", 
-				adjUsers.col("user.statuses_count")
-				.divide(adjUsers.col("Days_since_started")));
-		Dataset<Row> botsTweets = adjUsers.filter("Tweets_per_day > 50")
+		Dataset<Row> users = data.filter("user.statuses_count is not null and user_created_at is not null");
+		users = users.withColumn("Days_since_started", 
+				datediff(users.col("created_at"),users.col("user_created_at")));
+		users = users.withColumn("Tweets_per_day", 
+				users.col("user.statuses_count")
+				.divide(users.col("Days_since_started")));
+		Dataset<Row> botsTweets = users.filter("Tweets_per_day > 50")
 		.select("Tweets_per_day", "Days_since_started", "user.name", "user.description");
 		
 		long botCount = botsTweets.count();
@@ -149,6 +147,17 @@ public class SparkFactory {
 		return jsonObject.toString();
 	}
 	
+	public class NewsClass {
+		String name;
+		long news;
+		long total;
+		
+		public NewsClass(String Name, long News, long Total) {
+			this.name = Name;
+			this.news = News;
+			this.total = Total;
+		}
+	}
 	public String getNewsUsers() {
 		Dataset<Row> filteredData = data.filter("user.description is not null");
 		Dataset<Row> selData = filteredData.select(filteredData.col("user.name"), lower(filteredData.col("user.description")).alias("description"));
@@ -157,14 +166,15 @@ public class SparkFactory {
 		long retweets = newsOrgs.filter("retweeted_status is not null").count();
 		long replies = newsOrgs.filter("in_reply_to_status_id is not null").count();
 		long tweets = newsOrgs.filter("retweeted_status is null and in_reply_to_status_id is null").count();
+		
+		List<NewsClass> statuses = new ArrayList<NewsClass>();
+		statuses.add(new NewsClass("Retweets", retweets, totalRetweets));
+		statuses.add(new NewsClass("Tweets", tweets, totalTweets));
+		statuses.add(new NewsClass("Replies", replies, totalReplies));
 
 		JsonObject jsonObject = new JsonObject();
-		jsonObject.addProperty("NewsRetweets", retweets);
-		jsonObject.addProperty("NewsReplies", replies);
-		jsonObject.addProperty("NewsTweets", tweets);
-		jsonObject.addProperty("TotalRetweets", totalRetweets);
-		jsonObject.addProperty("TotalReplies", totalReplies);
-		jsonObject.addProperty("TotalTweets", totalTweets);
+		Gson gson = new GsonBuilder().create();
+		jsonObject.add("Statuses", gson.toJsonTree(statuses));
 		return jsonObject.toString();
 	}
 	
@@ -264,7 +274,6 @@ public class SparkFactory {
 					.filter("Count > 1000").agg(min("Hourly_Time"), max("Hourly_Time")).collectAsList();
 		
 		filtDates.groupBy("Hourly_Time").agg(count(lit(1)).alias("Count")).show();
-		//.agg(min("Hourly_Time"), max("Hourly_Time")).show();//.filter("Count > 1000")
 		
 		List<TopHashTimeClass> data = new ArrayList<TopHashTimeClass>();
 		String startTime = dateRange.get(0).get(0).toString();

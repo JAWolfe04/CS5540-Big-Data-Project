@@ -20,6 +20,11 @@ export class UserPage implements OnInit {
   influencerWidth = 750;
   influencerHeight = 500;
 
+  newsLoading = false;
+  newsError: string;
+  newsWidth = 750;
+  newsHeight = 500;
+
   constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
@@ -47,7 +52,98 @@ export class UserPage implements OnInit {
             this.influencerLoading = false;
           }
       );
+
+      this.dataService.getNews().subscribe((newsData: any) => {
+            this.createLayeredBar(newsData.Statuses);
+            this.newsLoading = false;
+          },
+          error => {
+            this.newsError = 'Unable to load News Tweet Graph';
+            this.newsLoading = false;
+          }
+      );
     }
+  }
+
+  createLayeredBar(dataset) {
+    const margin = {top: 20, right: 20, bottom: 30, left: 65};
+    const width =  this.newsWidth - margin.left - margin.right;
+    const height = this.newsHeight - margin.top - margin.bottom;
+
+    const svg = d3.select('#News')
+        .append('svg')
+        .attr('width', this.newsWidth)
+        .attr('height', this.newsHeight)
+        .append('g')
+        .attr('width', width)
+        .attr('height', height)
+        .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+    const x = d3.scaleBand().rangeRound([0, width])
+        .padding(0.1)
+        .domain(dataset.map(d => d.name));
+
+    const y = d3.scaleLinear().rangeRound([height, 0])
+         .domain([0, d3.max(dataset, d => d.total)]);
+
+    const color = d3.scaleOrdinal()
+        .domain(['news', 'total'])
+        .range(['orange', 'lightblue']);
+
+    dataset.forEach(d => {
+      let y0 = 0;
+      d.rates = color.domain().map(name => {
+        return { type: d.name, name, y0, y1: y0 = +d[name], amount: d[name] };
+      });
+    });
+
+    svg.append('g')
+        .attr('transform', 'translate(0,' + height + ')')
+        .call(d3.axisBottom(x));
+
+    svg.append('g')
+        .call(d3.axisLeft(y).ticks(10))
+        .append('text')
+        .attr('transform', 'rotate(-90)')
+        .attr('y', -60)
+        .attr('dy', '0.71em')
+        .attr('fill', '#000')
+        .attr('font-weight', 'bold')
+        .attr('text-anchor', 'end')
+        .text('Count');
+
+    svg.append('g').selectAll('g')
+        .data(dataset)
+        .enter().append('g')
+        .selectAll('rect')
+        .data(d => d.rates)
+        .enter().append('rect')
+        .attr('x', d => x(d.type))
+        .attr('y', d => y(d.amount))
+        .attr('height', d => y(d.y0) - y(d.y1))
+        .attr('width', d => x.bandwidth())
+        .attr('fill', d => color(d.name));
+
+    const legend = svg.selectAll('.legend')
+        .data(color.domain().slice().reverse())
+        .enter().append('g')
+        .attr('class', 'legend')
+        .attr('transform', (d, i) => 'translate(' + i * -70 + ',283)');
+
+
+    legend.append('rect')
+        .attr('x', width + -53)
+        .attr('width', 10)
+        .attr('height', 10)
+        .attr('fill', color);
+
+    legend.append('text')
+        .attr('x', width - 40)
+        .attr('y', 5)
+        .attr('width', 40)
+        .attr('dy', '.35em')
+        .attr('text-anchor', 'start')
+        .text(d => d);
   }
 
   createDonuts(dataset, chartName) {
