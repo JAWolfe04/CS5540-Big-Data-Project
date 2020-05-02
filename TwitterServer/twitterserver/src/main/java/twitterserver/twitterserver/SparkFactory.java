@@ -34,7 +34,7 @@ public class SparkFactory {
 	private SparkFactory() {		
 		spark = SparkSession.builder().appName(Config.appname)
 				.master(Config.sparkMaster).getOrCreate();
-		Logger.getRootLogger().setLevel(Level.ERROR);
+		//Logger.getRootLogger().setLevel(Level.ERROR);
 		
 		File tmpDir = new File(Config.path);
 		if(!tmpDir.exists()) {
