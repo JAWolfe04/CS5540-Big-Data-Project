@@ -68,36 +68,36 @@ We used numerous libraries to collect, analyze and display the data:
 # Visualizations
 ### Our analysis included a sample of 100k coronavirus related tweets.
 ## Word Cloud of Usernames with Greatest Influence
-![Word Cloud](./Screenshots/WordCloud.png)
+![Word Cloud](./Screenshots/Word Cloud_2mil.png)
 
 ## Coronavirus Hashtag Bubble Chart:
 Each bubble is a different corona virus Hashtag with the number of tweets associated with that Hashtag.  
-![Bubble Chart](./Screenshots/BubbleChart.png)
+![Bubble Chart](./Screenshots/Screenshots/Bubble%20Chart.png)
 
 ## Coronavirus Top 10 Hashtag Bar Chart:
 This only shows Hashtags with more than 10 tweets.  
-![Top Hashtags Bar Graph](./Screenshots/Top10HashtagsBars.png)
+![Top Hashtags Bar Graph](./Screenshots/Hashtag%20Bar%20Graph.png
 
 ## World Countries Map of Coronavirus Tweets
-![Countries Map](./Screenshots/CountriesMap.png)
+![Countries Map](./Screenshots/Choropleth%20Map_2mil.png)
 
 ## Donut Charts of Bot Frequencies and activities
-![Bot Charts](./Screenshots/BotDonutCharts.png)
+![Bot Charts](./Screenshots/Bot_Activity.png)
 
 ## Pie Chart of User Tweet Activity
-![Tweet Pie Chart](./Screenshots/TweetFreqPieChart.png)
+![Tweet Pie Chart](./Screenshots/Tweet%20Pie%20Chart_2mil.png)
 
 ## World Map of Coronavirus tweet GPS coordinates - Still in development
-![World GPS Map](./Screenshots/coming-soon.png)
+![World GPS Map](./Screenshots/GPS%20Map.png)
 
 ## Multiple Line Graph of Top 10 hastags over time - Still in development
-![Top 10 Line Graph](./Screenshots/coming-soon.png)
+![Top 10 Line Graph](./Screenshots/Hashtags%20over%20time.png)
 
 ## Stacked Area Graph of Most retweeted tweet of corona with follower count and listed - Still in development
-![Stacked Area Graph](./Screenshots/coming-soon.png)
+![Stacked Area Graph](./Screenshots/Retweet_Area_Chart.png)
 
-## Layered Bar Graph of News agency influences - Still in development
-![News Layered Bar Graph](./Screenshots/coming-soon.png)
+## Layered Bar Graph of News agency activity - Still in development
+![News Layered Bar Graph](./Screenshots/News_Activity.png)
 
 ---
 
