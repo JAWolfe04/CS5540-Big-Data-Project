@@ -68,18 +68,18 @@ We used numerous libraries to collect, analyze and display the data:
 # Visualizations
 ### Our analysis included a sample of 100k coronavirus related tweets.
 ## Word Cloud of Usernames with Greatest Influence
-![Word Cloud](./Screenshots/Word Cloud_2mil.png)
+![Word Cloud](https://github.com/JAWolfe04/CS5540-Big-Data-Project/blob/master/Screenshots/Word%20Cloud_2mil.png)
 
 ## Coronavirus Hashtag Bubble Chart:
 Each bubble is a different corona virus Hashtag with the number of tweets associated with that Hashtag.  
-![Bubble Chart](./Screenshots/Screenshots/Bubble%20Chart.png)
+![Bubble Chart](https://github.com/JAWolfe04/CS5540-Big-Data-Project/blob/master/Screenshots/Bubble%20Chart.png)
 
 ## Coronavirus Top 10 Hashtag Bar Chart:
 This only shows Hashtags with more than 10 tweets.  
-![Top Hashtags Bar Graph](./Screenshots/Hashtag%20Bar%20Graph.png
+![Top Hashtags Bar Graph](https://github.com/JAWolfe04/CS5540-Big-Data-Project/blob/master/Screenshots/Hashtag%20Bar%20Graph.png)
 
 ## World Countries Map of Coronavirus Tweets
-![Countries Map](./Screenshots/Choropleth%20Map_2mil.png)
+![Countries Map](./Screenshots/Choropleth-Map_2mil.png)
 
 ## Donut Charts of Bot Frequencies and activities
 ![Bot Charts](./Screenshots/Bot_Activity.png)
