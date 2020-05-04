@@ -1,0 +1,24 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Users Activity
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-item lines="none">
+    <div id="BotsTotals" lines="none">
+      <ion-label *ngIf="botError">{{botError}}</ion-label>
+    </div>
+    <div id="BotsFrequency" lines="none">
+      <ion-label *ngIf="botError">{{botError}}</ion-label>
+    </div>
+  </ion-item>
+  <div id="Influencers">
+    <ion-label *ngIf="influencerError">{{influencerError}}</ion-label>
+  </div>
+  <div id="News">
+    <ion-label *ngIf="newsError">{{newsError}}</ion-label>
+  </div>
+</ion-content>

@@ -23,5 +23,5 @@
 hs_err_pid*
 .metadata
 TweetCollector/TweetCollector/Input/
-twitter4j-4.0.7/
+Datasets/*
 TweetCollector/TweetCollector/twitter4j.properties
