@@ -85,7 +85,7 @@ This only shows Hashtags with more than 10 tweets.
 ![Bot Charts](./Screenshots/Bot_Activity.png)
 
 ## Pie Chart of User Tweet Activity
-![Tweet Pie Chart](./Screenshots/Tweet%20Pie%20Chart_2mil.png)
+![Tweet Pie Chart](https://github.com/JAWolfe04/CS5540-Big-Data-Project/blob/master/Screenshots/Choropleth%20Map_2mil.png)
 
 ## World Map of Coronavirus tweet GPS coordinates - Still in development
 ![World GPS Map](./Screenshots/GPS%20Map.png)
