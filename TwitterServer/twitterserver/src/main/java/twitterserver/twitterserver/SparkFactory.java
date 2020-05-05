@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.apache.log4j.Level;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -34,7 +33,6 @@ public class SparkFactory {
 	private SparkFactory() {		
 		spark = SparkSession.builder().appName(Config.appname)
 				.master(Config.sparkMaster).getOrCreate();
-		//Logger.getRootLogger().setLevel(Level.ERROR);
 		
 		File tmpDir = new File(Config.path);
 		if(!tmpDir.exists()) {
@@ -53,14 +51,14 @@ public class SparkFactory {
     	totalRetweets = data.filter("retweeted_status is not null").count();
 		totalReplies = data.filter("in_reply_to_status_id is not null").count();
 		totalTweets = data.filter("retweeted_status is null and in_reply_to_status_id is null").count();
-		totalStatuses = data.count(); 
+		totalStatuses = data.count();
 	}
 
 	public String getBubbleChartData() {
 		
     	hashtag.createOrReplaceTempView("thash");
     	Dataset<Row> hashtagCount = spark.sql("Select col.text as text, count(col.text) as count from thash group by text");
-    	hashtagCount = hashtagCount.filter("count > 10");
+    	hashtagCount = hashtagCount.sort(desc("count")).limit(200);
     	String counts = hashtagCount.toJSON().toJavaRDD().collect().toString();
     	
     	JsonObject jsonObject = new JsonObject();
@@ -129,7 +127,6 @@ public class SparkFactory {
 	}
 	
 	public String getGeoData() {
-		System.out.println("Getting Geodata");
 		Dataset<Row> coordsData = data.filter("geo.coordinates is not null")
 				.selectExpr("id", "coordinates.coordinates");
 		Dataset<Row> placeData = data.filter("place.bounding_box.coordinates is not null and geo.coordinates is null")
@@ -243,7 +240,7 @@ public class SparkFactory {
 			long maxFollow =  (long)maxRetweetDF.groupBy().max("followers_count").collectAsList().get(0).get(0);
 			Dataset<Row> maxFollowDF = maxRetweetDF.filter(maxRetweetDF.col("followers_count").equalTo(lit(maxFollow)));
 			long maxListed = (long)maxFollowDF.groupBy().max("listed_count").collectAsList().get(0).get(0);			
-			data.add(new MostRetweetClass(time, maxRetweet, maxFollow, maxListed));
+			data.add(new MostRetweetClass(time, Math.round(maxRetweet / 1000.0), Math.round(maxFollow / 100.0), maxListed));
 			
 			++hour;
 			if(hour == 24) {
@@ -273,8 +270,6 @@ public class SparkFactory {
 		List<Row> dateRange = filtDates.groupBy("Hourly_Time").agg(count(lit(1)).alias("Count"))
 					.filter("Count > 1000").agg(min("Hourly_Time"), max("Hourly_Time")).collectAsList();
 		
-		filtDates.groupBy("Hourly_Time").agg(count(lit(1)).alias("Count")).show();
-		
 		List<TopHashTimeClass> data = new ArrayList<TopHashTimeClass>();
 		String startTime = dateRange.get(0).get(0).toString();
 		String endTime = dateRange.get(0).get(1).toString();
@@ -286,8 +281,12 @@ public class SparkFactory {
 			String time = "03-" + String.valueOf(day) + "-"  + (hour < 10 ? "0" : "") + String.valueOf(hour);
 			Dataset<Row> timedSet = filtDates.filter(filtDates.col("Hourly_Time").equalTo(lit(time)));
 			List<Row> top10 = timedSet.groupBy("col.text").agg(count(lit(1)).alias("count"))
-								.orderBy(desc("count")).takeAsList(10);
-			top10.forEach(r -> data.add(new TopHashTimeClass(time, r.get(0).toString(), (long)r.get(1))));
+								.orderBy(desc("count")).takeAsList(11);
+			top10.forEach(r -> { 
+				if(!r.get(0).toString().equalsIgnoreCase("coronavirus")) {
+					data.add(new TopHashTimeClass(time, r.get(0).toString(), (long)r.get(1)));
+				}
+			});
 			
 			++hour;
 			if(hour == 24) {

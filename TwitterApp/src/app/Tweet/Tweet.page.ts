@@ -9,10 +9,12 @@ import {environment} from '../../environments/environment';
   styleUrls: ['./Tweet.page.scss'],
 })
 export class TweetPage implements OnInit {
+  freqLoading = false;
   freqError: string;
   freqWidth = 500;
   freqHeight = 500;
 
+  retweetLoading = false;
   retweetError: string;
   retweetWidth = 1000;
   retweetHeight = 500;
@@ -21,26 +23,32 @@ export class TweetPage implements OnInit {
 
   ngOnInit() {
     if (!environment.testing) {
-        this.dataService.getTweetFreq().subscribe((freqData: any) => {
-              this.createPie([
-                {name: 'Retweets', percent: freqData.Retweets},
-                {name: 'Replies', percent: freqData.Replies},
-                {name: 'Tweets', percent: freqData.Tweets}
-              ]);
-            },
-            error => {
-              this.freqError = 'Unable to load Tweet Frequency Data';
-            }
-        );
-        this.dataService.getMostRetweeted().subscribe((retweeted: any) => this.createStacked(retweeted.TimePoints),
+      this.freqLoading = true;
+      this.retweetLoading = true;
+
+      this.dataService.getTweetFreq().subscribe((freqData: any) => {
+            this.freqLoading = false;
+            this.createPie([
+              {name: 'Retweets', percent: freqData.Retweets},
+              {name: 'Replies', percent: freqData.Replies},
+              {name: 'Tweets', percent: freqData.Tweets}
+            ]);
+          },
           error => {
+            this.freqLoading = false;
             this.freqError = 'Unable to load Tweet Frequency Data';
           }
-        );
+      );
+      this.dataService.getMostRetweeted().subscribe((retweeted: any) => {
+            this.retweetLoading = false;
+            this.createStacked(retweeted.TimePoints);
+          },
+              error => {
+            this.retweetLoading = false;
+            this.freqError = 'Unable to load Tweet Frequency Data';
+        }
+      );
     }
-    // this.createStacked([{Time: '03-13-23', Retweet_Count: 1758, Followers_Count: 235, Listed_Count: 54},
-    //        {Time: '03-14-00', Retweet_Count: 1265, Followers_Count: 325, Listed_Count: 93},
-    //        {Time: '03-14-01', Retweet_Count: 1495, Followers_Count: 763, Listed_Count: 25}]);
   }
 
   createStacked(dataset) {

@@ -20,7 +20,7 @@ export class UserPage implements OnInit {
   influencerWidth = 750;
   influencerHeight = 500;
 
-  newsLoading = false;
+  newsLoading: boolean;
   newsError: string;
   newsWidth = 750;
   newsHeight = 500;
@@ -31,6 +31,7 @@ export class UserPage implements OnInit {
     if (!environment.testing) {
       this.influencerLoading = true;
       this.botLoading = true;
+      this.newsLoading = true;
 
       this.dataService.getBots().subscribe((botData: any) => {
             this.createDonuts(botData.Total, '#BotsTotals');
@@ -129,7 +130,6 @@ export class UserPage implements OnInit {
         .enter().append('g')
         .attr('class', 'legend')
         .attr('transform', (d, i) => 'translate(' + i * -70 + ',283)');
-
 
     legend.append('rect')
         .attr('x', width + -53)

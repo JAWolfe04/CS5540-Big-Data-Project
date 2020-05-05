@@ -14,12 +14,12 @@ import {environment} from '../../environments/environment';
 export class MapPage implements OnInit {
   loadingWorld: boolean;
   errorWorld: string;
-  worldWidth = 975;
+  worldWidth = 1000;
   worldHeight = 610;
   loadingPoint: boolean;
   errorPoint: string;
-  PointWidth = 975;
-  PointHeight = 610;
+  pointWidth = 975;
+  pointHeight = 610;
 
   constructor(private dataService: DataService) {}
 
@@ -49,12 +49,11 @@ export class MapPage implements OnInit {
 
   createWorldMap(dataset) {
       const colorScale = d3.scaleThreshold()
-          .domain([1, 10, 100, 500, 1000, 5000, 10000, 100000])
-          .range(d3.schemeBlues[8]);
+          .domain([1, 10, 100, 500, 1000, 5000, 10000, 100000, 1000000])
+          .range(d3.schemeBlues[9]);
 
-      const svg = d3.select('#Worldchart')
+      const svg = d3.select('#CountryMap')
           .append('svg')
-          .attr('viewBox', `0,0,${this.worldWidth},${this.worldHeight}`)
           .attr('width', this.worldWidth)
           .attr('height', this.worldHeight);
 
@@ -69,9 +68,10 @@ export class MapPage implements OnInit {
 
         svg.append('g')
             .attr('class', 'legendLinear')
-            .attr('transform', 'translate(810, 450)');
+            .attr('transform', 'translate(810, 400)');
 
         const legendLinear = legend.legendColor()
+            .labelFormat(d3.format('1'))
             .shape('rect')
             .orient('vertical')
             .shapeWidth(40)
@@ -97,11 +97,10 @@ export class MapPage implements OnInit {
   }
 
   createPointMap(dataset) {
-      const svg = d3.select('#Worldchart')
+      const svg = d3.select('#GPSMap')
           .append('svg')
-          .attr('viewBox', `0,0,${this.PointWidth},${this.PointHeight}`)
-          .attr('width', this.PointWidth)
-          .attr('height', this.PointHeight);
+          .attr('width', this.pointWidth)
+          .attr('height', this.pointHeight);
 
       const projection = d3.geoMercator().scale(100).center([0, 20])
           .translate([this.worldWidth / 2, this.worldHeight / 2]);

@@ -22,7 +22,7 @@ export class HashtagPage implements OnInit {
   loadingTopHashTime: boolean;
   errorTopHashTime: string;
   TopHashTimeHeight = 500;
-  TopHashTimeWidth = 750;
+  TopHashTimeWidth = 1000;
 
   constructor(private dataService: DataService) {}
 
@@ -50,8 +50,8 @@ export class HashtagPage implements OnInit {
                   this.loadingTopHash = false;
               });
 
-          this.dataService.getTopHashTime().subscribe(topHashTime => {
-                  this.createTopHashTime(topHashTime);
+          this.dataService.getTopHashTime().subscribe((topHashTime: any) => {
+                  this.createTopHashTime(topHashTime.TimePoints);
                   this.loadingTopHashTime = false;
               },
               error => {
@@ -59,16 +59,6 @@ export class HashtagPage implements OnInit {
                   this.loadingTopHashTime = false;
               });
       }
-    /*this.createTopHashTime([
-          {Time: '03-13-23', Hashtag: 'Corona', Count: 14684},
-          {Time: '03-13-23', Hashtag: 'China', Count: 12863},
-          {Time: '03-13-23', Hashtag: 'Trump', Count: 18462},
-          {Time: '03-14-00', Hashtag: 'Corona', Count: 17452},
-          {Time: '03-14-00', Hashtag: 'China', Count: 19539},
-          {Time: '03-14-00', Hashtag: 'Trump', Count: 12336},
-          {Time: '03-14-01', Hashtag: 'Corona', Count: 9573},
-          {Time: '03-14-01', Hashtag: 'China', Count: 19463},
-          {Time: '03-14-01', Hashtag: 'Trump', Count: 16493}]);*/
   }
 
   createTop10Hash(dataset) {
@@ -123,36 +113,68 @@ export class HashtagPage implements OnInit {
   }
 
   createTopHashTime(dataset) {
-      /*const parseDate = d3.timeParse('%m-%d-%h');
+      const margin = {top: 10, right: 200, bottom: 30, left: 50};
+      const width = this.TopHashTimeWidth - margin.left - margin.right;
+      const height = this.TopHashTimeHeight - margin.top - margin.bottom;
+      const dateParse = d3.timeParse('%m-%d-%H');
+      const color = d3.scaleOrdinal(['#009900', '#ff9900', '#ff0000', '#cc99ff',
+          '#660066', '#0033cc', '#00ffff', '#ff00ff', '#ff0066', '#000066',
+          '#00cc99', '#666699', '#ffff00', '#00ff00', '#cc3300', '#6600cc',
+          '#330033', '#ffc6b3', '#003300', '#990000']);
 
-      const x = d3.scaleTime().range([0, this.TopHashWidth]);
-      const y = d3.scaleLinear().range([this.TopHashTimeHeight, 0]);
+      const xScale = d3.scaleTime().range([0, width])
+          .domain(d3.extent(dataset, d => dateParse(d.Time)));
 
-      const xAxis = d3.axisBottom().scale(x)
-          .orient('bottom').ticks(5);
+      const yScale = d3.scaleLinear().range([height, 0])
+          .domain([0, d3.max(dataset, d => d.Count)]);
 
-      const yAxis = d3.axisLeft.scale(y)
-          .orient('left').ticks(5);
+      const countline = d3.line()
+          .x(d => xScale(dateParse(d.Time)))
+          .y(d => yScale(d.Count));
 
-      const countline = d3.svg.line()
-          .x(d => x(d.Time))
-          .y(d => y(d.Count));
+      const dataNest = d3.nest()
+          .key(d => d.Hashtag)
+          .entries(dataset);
 
       const svg = d3.select('#TopHashTime')
           .append('svg')
-          .attr('width', this.TopHashWidth)
-          .attr('height', this.TopHashTimeHeight)
+          .attr('width', width + margin.left + margin.right)
+          .attr('height', height + margin.top + margin.bottom)
           .append('g')
-          .attr('transform',
-              'translate(' + 25 + ',' + 25 + ')');
+          .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-      dataset.forEach(d => {
-          d.Time = parseDate(d.Time);
-          d.Count = +d.Count;
+      dataNest.forEach((d, i) => {
+          svg.append('path')
+              .attr('stroke', color(d.key))
+              .attr('fill', 'none')
+              .attr('d', countline(d.values));
       });
 
-      x.domain(d3.extent(dataset, d => d.Time));
-      y.domain([0, d3.max(dataset, d => d.Count)]);*/
+      svg.append('g')
+          .attr('transform', 'translate(0,' + height + ')')
+          .call(d3.axisBottom(xScale));
+
+      svg.append('g')
+          .call(d3.axisLeft(yScale));
+
+      const legend = svg.selectAll('.legend')
+          .data(color.domain().slice())
+          .enter().append('g');
+
+      legend.append('rect')
+          .attr('x', width + 10)
+          .attr('y', (d, i) => i * 20)
+          .attr('width', 10)
+          .attr('height', 10)
+          .attr('fill', d => color(d));
+
+      legend.append('text')
+          .attr('x', width + 22)
+          .attr('y', (d, i) => (i * 20) + 6)
+          .attr('width', 40)
+          .attr('dy', '.35em')
+          .attr('text-anchor', 'start')
+          .text(d => d);
   }
 
   createBubbles(dataset) {
