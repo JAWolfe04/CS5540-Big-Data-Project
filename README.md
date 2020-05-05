@@ -67,37 +67,39 @@ We used numerous libraries to collect, analyze and display the data:
 ---
 
 # Visualizations
-### Our analysis included a sample of 100k coronavirus related tweets.
-## Word Cloud of Usernames with Greatest Influence
+### Our analysis included a sample of 500k to 2.3 million coronavirus related tweets. 
+The goal was to perform analyses over all 2.3 million tweets, however some queries are really slow and could not be performed on 2.3 million tweets or the chart became too busy to be read where fewer tweets showed better.
+
+## Word Cloud of Usernames with Most Followers of 2.3 mil tweets
 ![Word Cloud](https://github.com/JAWolfe04/CS5540-Big-Data-Project/blob/master/Screenshots/Word%20Cloud_2mil.png)
 
-## Coronavirus Hashtag Bubble Chart:
+## Coronavirus Hashtag Bubble Chart of 500k tweets
 Each bubble is a different corona virus Hashtag with the number of tweets associated with that Hashtag.  
 ![Bubble Chart](https://github.com/JAWolfe04/CS5540-Big-Data-Project/blob/master/Screenshots/Bubble%20Chart.png)
 
-## Coronavirus Top 10 Hashtag Bar Chart:
+## Coronavirus Top 10 Hashtag Bar Chart of 500k tweets
 This only shows Hashtags with more than 10 tweets.  
 ![Top Hashtags Bar Graph](https://github.com/JAWolfe04/CS5540-Big-Data-Project/blob/master/Screenshots/Hashtag%20Bar%20Graph.png)
 
-## World Countries Map of Coronavirus Tweets
+## World Countries Map of 2.3 mil Coronavirus Tweets
 ![Countries Map](https://github.com/JAWolfe04/CS5540-Big-Data-Project/blob/master/Screenshots/Choropleth%20Map_2mil.png)
 
-## Donut Charts of Bot Frequencies and activities
+## Donut Charts of Bot Frequencies and Activities of 500k tweets
 ![Bot Charts](./Screenshots/Bot_Activity.png)
 
-## Pie Chart of User Tweet Activity
+## Pie Chart of User Tweet Activity of 2.3mil tweets
 ![Tweet Pie Chart](https://github.com/JAWolfe04/CS5540-Big-Data-Project/blob/master/Screenshots/Tweet%20Pie%20Chart_2mil.png)
 
-## World Map of Coronavirus tweet GPS coordinates
+## World Map of Coronavirus tweet GPS coordinates of 500k tweets
 ![World GPS Map](./Screenshots/GPS%20Map.png)
 
-## Multiple Line Graph of Top 10 hastags over time
+## Multiple Line Graph of Top 10 hastags over time of 500k tweets
 ![Top 10 Line Graph](./Screenshots/Hashtags%20over%20time.png)
 
-## Stacked Area Graph of Most retweeted tweet of corona with follower count and listed
+## Stacked Area Graph of Most retweeted tweet of corona with follower count and groups of 500k tweets
 ![Stacked Area Graph](./Screenshots/Retweet_Area_Chart.png)
 
-## Layered Bar Graph of News agency activity
+## Layered Bar Graph of News agency activity of 500k tweets
 ![News Layered Bar Graph](./Screenshots/News_Activity.png)
 
 ---
