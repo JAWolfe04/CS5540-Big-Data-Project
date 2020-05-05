@@ -105,7 +105,7 @@ This only shows Hashtags with more than 10 tweets.
 ---
 
 # Code
-The code is stored and managed via GitHub. It is available at [Wolfe-Skoglund GitHub code](https://github.com/JAWolfe04/CS5540-Big-Data-Project.png)
+The code is stored and managed via GitHub. It is available at [Wolfe-Skoglund GitHub code](https://github.com/JAWolfe04/CS5540-Big-Data-Project)
 ---
 
 # Demo and Setup
