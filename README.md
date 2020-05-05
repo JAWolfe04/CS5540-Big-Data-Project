@@ -53,16 +53,17 @@ We used numerous libraries to collect, analyze and display the data:
 
 # Queries
 ### Here are the queries we used to get and analyze the data:
-1. Bubble Chart Data - a hashtagCount query is defined to capture the number of times a a tweet mentiones each Hashtag. We remove all Hashtags that are mentioned in less than 10 tweetss. 
-2. Influencers - the Influencers query will capture the users with the most followers \(these are verified followers\). The query is ordered by the number of followers and we limit the data to the top 50 influencers. 
+1. Bubble Chart Data - a hashtag count query is defined to capture the number of times a tweet mentions each Hashtag. We limited the query to only return the top 200 results. 
+2. Influencers - the Influencers query will capture tweets by users with the most followers. The query is ordered by the number of followers and we limit the data to users of the top 50 follower counts. 
 3. Top Hashtags Overall - This query is used to capture the top ten Hashtags based on the number of tweets that reference the Hashtag.
-4. Bots Data - made up from multiple queries. This is developed by capturing the users where the "user.statuses_count", "user.created_at" and tweet "created_at" fields all have data (they are not null fields). This data is used to determine the users with more than 50 tweets per day. The data is grouped by users and captures the counts for Tweets per day, Days since started, user name and description
+4. Bots Data - made up from multiple queries. The essential data is the time the user account was created(user.created_at), the time that the tweet was created(created_at) and the amount of status updates: tweets, retweets and replies; that the user has made since creating the account(user.statuses_count). The first query is null checks on "user.statuses_count", "user.created_at" and "created_at". Next, the time difference between "user.created_at" and "created_at" are used to find the amount of days the account has existed. Then "statuses_count" is divided by the time the account has existed to give the average amount of tweets per day. This data is used to  count the number of users with more than 50 tweets per day, which is a good likelihood of being a bot. Then this set of bot tweets were divided into tweets, retweets and replies and counted to better understand the activities of bots.
 5. Coronavirus tweet, retweet and response freqencies - 
 6. Coronavirus tweets grouped by country -
-7. Coronavirus tweet GPS coordinates - 
+7. Coronavirus tweet GPS coordinates - this query uses either the tweet latitude and logitude or if the tweet GPS is disabled the latitue and longitude of an edge of the user's reported place of living to understand where most of the tweets are originating. First the tweets with GPS enabled are collected. Then the remaining tweets with a home location are collected and an edge of the home area is extracted. Next, the latitudes and logitudes of these two sets are unioned. Finally, the latitude and longitude are divided into thier own columns. 
 8. Top 10 hastags over time -
 9. Most retweeted tweet of corona with follower count and listed -
-10. News agency influences -
+10. News agency influences - this query identifies the users that mention news as part of their description and shows their activity. The first part of this set of queries was to convert the descriptions to lower can then filter all descriptions that contain news in some form in the description. Next, the activities of these accounts; tweets, retweets and replies; were determined.
+
 ---
 
 # Visualizations
@@ -79,24 +80,24 @@ This only shows Hashtags with more than 10 tweets.
 ![Top Hashtags Bar Graph](https://github.com/JAWolfe04/CS5540-Big-Data-Project/blob/master/Screenshots/Hashtag%20Bar%20Graph.png)
 
 ## World Countries Map of Coronavirus Tweets
-![Countries Map](./Screenshots/Choropleth-Map_2mil.png)
+![Countries Map](https://github.com/JAWolfe04/CS5540-Big-Data-Project/blob/master/Screenshots/Choropleth%20Map_2mil.png)
 
 ## Donut Charts of Bot Frequencies and activities
 ![Bot Charts](./Screenshots/Bot_Activity.png)
 
 ## Pie Chart of User Tweet Activity
-![Tweet Pie Chart](https://github.com/JAWolfe04/CS5540-Big-Data-Project/blob/master/Screenshots/Choropleth%20Map_2mil.png)
+![Tweet Pie Chart](https://github.com/JAWolfe04/CS5540-Big-Data-Project/blob/master/Screenshots/Tweet%20Pie%20Chart_2mil.png)
 
-## World Map of Coronavirus tweet GPS coordinates - Still in development
+## World Map of Coronavirus tweet GPS coordinates
 ![World GPS Map](./Screenshots/GPS%20Map.png)
 
-## Multiple Line Graph of Top 10 hastags over time - Still in development
+## Multiple Line Graph of Top 10 hastags over time
 ![Top 10 Line Graph](./Screenshots/Hashtags%20over%20time.png)
 
-## Stacked Area Graph of Most retweeted tweet of corona with follower count and listed - Still in development
+## Stacked Area Graph of Most retweeted tweet of corona with follower count and listed
 ![Stacked Area Graph](./Screenshots/Retweet_Area_Chart.png)
 
-## Layered Bar Graph of News agency activity - Still in development
+## Layered Bar Graph of News agency activity
 ![News Layered Bar Graph](./Screenshots/News_Activity.png)
 
 ---
