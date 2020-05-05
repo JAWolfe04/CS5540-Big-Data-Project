@@ -48,10 +48,10 @@ public class Main {
                 return false;
             }
         } catch (TwitterException te) {
-        	handleConnectionError(te);
+        	handleTwitterException(te);
         }catch (Exception e) {
             System.out.println("Something went wrong: " + e);
-            System.exit(-1);
+            Thread.sleep(1000 * 60 * 2);
         }
         return true;
     }
@@ -87,10 +87,10 @@ public class Main {
                     query.setMaxId(maxId-1); 
                 }
             }catch (TwitterException te) {
-            	handleConnectionError(te);
+            	handleTwitterException(te);
             }catch (Exception e) {
                 System.out.println("Something went wrong: " + e);
-                System.exit(-1);
+                Thread.sleep(1000 * 60 * 2);
             }
             whileCount++;
         }
@@ -104,13 +104,14 @@ public class Main {
 		tweetCount = 0;
 	}
 	
-	public static void handleConnectionError(TwitterException te) throws InterruptedException {    	
+	public static void handleTwitterException(TwitterException te) throws InterruptedException {    	
         if(te.exceededRateLimitation()) {
         	System.out.println(LocalTime.now() + ": Exceeded Limit, waiting 15 minutes");
         	Thread.sleep(1000 * 60 * 15);
         } else {
         	System.out.println("Couldn't connect: " + te);
-        	System.exit(-1);
+        	Thread.sleep(1000 * 60 * 2);
         }
 	}
+	
 }
