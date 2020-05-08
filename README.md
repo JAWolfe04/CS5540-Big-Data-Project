@@ -85,22 +85,22 @@ This only shows Hashtags with more than 10 tweets.
 ![Countries Map](https://github.com/JAWolfe04/CS5540-Big-Data-Project/blob/master/Screenshots/Choropleth%20Map_2mil.png)
 
 ## Donut Charts of Bot Frequencies and Activities of 500k tweets
-![Bot Charts](./Screenshots/Bot_Activity.png)
+![Bot Charts](https://github.com/JAWolfe04/CS5540-Big-Data-Project/blob/master/Screenshots/Bot_Activity.png)
 
 ## Pie Chart of User Tweet Activity of 2.3mil tweets
 ![Tweet Pie Chart](https://github.com/JAWolfe04/CS5540-Big-Data-Project/blob/master/Screenshots/Tweet%20Pie%20Chart_2mil.png)
 
 ## World Map of Coronavirus tweet GPS coordinates of 500k tweets
-![World GPS Map](./Screenshots/GPS%20Map.png)
+![World GPS Map](https://github.com/JAWolfe04/CS5540-Big-Data-Project/blob/master/Screenshots/GPS%20Map.png)
 
 ## Multiple Line Graph of Top 10 hastags over time of 500k tweets
-![Top 10 Line Graph](./Screenshots/Hashtags%20over%20time.png)
+![Top 10 Line Graph](https://github.com/JAWolfe04/CS5540-Big-Data-Project/blob/master/Screenshots/Hashtags%20over%20time.png)
 
 ## Stacked Area Graph of Most retweeted tweet of corona with follower count and groups of 500k tweets
-![Stacked Area Graph](./Screenshots/Retweet_Area_Chart.png)
+![Stacked Area Graph](https://github.com/JAWolfe04/CS5540-Big-Data-Project/blob/master/Screenshots/Retweet_Area_Chart.png)
 
 ## Layered Bar Graph of News agency activity of 500k tweets
-![News Layered Bar Graph](./Screenshots/News_Activity.png)
+![News Layered Bar Graph](https://github.com/JAWolfe04/CS5540-Big-Data-Project/blob/master/Screenshots/News_Activity.png)
 
 ---
 
